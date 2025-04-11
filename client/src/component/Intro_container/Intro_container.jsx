@@ -19,7 +19,37 @@ const Intro_container = () => {
     }
     return () => observer.disconnect()
   }, [])
-
+  const images = [
+    '/images/daihocmo.jpg',
+    '/images/hienmau.png',
+    '/images/hust.jpg',
+    '/images/ne.png',
+    '/images/tinhnguyen.png',
+    '/images/vietcombank.jpg',
+    '/images/vnpt.png',
+  ];
+  const VISIBLE_COUNT = 5; 
+  const [index, setIndex] = useState(0);
+  const trackRef = useRef(null);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => prev + 1);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+  useEffect(() => {
+    const totalSlides = images.length;
+    if (index === totalSlides) {
+      const timer = setTimeout(() => {
+        trackRef.current.style.transition = 'none';
+        setIndex(0);
+      }, 500);
+      return () => clearTimeout(timer);
+    } else {
+      trackRef.current.style.transition = 'transform 0.5s ease-in-out';
+    }
+  }, [index]);
+  const extendedImages = [...images, ...images.slice(0, VISIBLE_COUNT)];
   return (
     <div className='intro_container' ref={containerRef}>
       <div className='intro_container_top'>
@@ -54,13 +84,22 @@ const Intro_container = () => {
         </div>
       </div>
       <div className='intro_container_middle_event'>
-
+        
       </div>
       <div className='intro_container_middle_feedback'>
 
       </div>
       <div className='intro_container_bottom'>
-
+        <p>Đối tác - <span>Khách Hàng</span></p>
+        <div className="slider-loop-container">
+          <div className="slider-loop-track" ref={trackRef} style={{transform: `translateX(-${(100 / VISIBLE_COUNT) * index}%)`,}} >
+            {extendedImages.map((img, i) => (
+              <div className="slider-loop-item" key={i}>
+              <img src={img} alt={`img-${i}`} />
+            </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )

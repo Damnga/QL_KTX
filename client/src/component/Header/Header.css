@@ -18,7 +18,7 @@
   }
   
   .language {
-    font-size: 18px;
+    font-size: 16px;
     color: #333;
     cursor: pointer;
   }
@@ -29,7 +29,7 @@
   .hotline {
     font-size: 14px;
     color: #333;
-    font-size: 18px;
+    font-size: 16px;
   }
   
   .hotline_number {
@@ -40,7 +40,7 @@
   
   .header_center a {
     margin: 0 10px;
-    font-size: 18px;
+    font-size: 16px;
     color: #333;
     text-decoration: none;
   }
