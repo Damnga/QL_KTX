@@ -1,10 +1,10 @@
-.dashboard{
+.contractmanage{
     background: linear-gradient(to bottom, #4b79a1, #002f6c);
     width: 100%;
     height: 100vh;
     display: flex;
 }
-.dashbar_container{
+.container{
     background-color: white;
     width: 100%;
     margin-top: 20px;

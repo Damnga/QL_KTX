@@ -1,7 +1,6 @@
 .sidebar {
   width: 260px;
   height: 100vh;
-  background: linear-gradient(to bottom, #4b79a1, #002f6c);
   position: fixed;
   top: 0;
   left: 0;
@@ -9,15 +8,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
-  padding-top: 20px;
+  padding-top: 30px; 
   padding-left: 30px;
+  background: linear-gradient(to bottom, #4b79a1, #002f6c);
+}
+
+.sidebar hr {
+  color: white;
+  width: 230px;
+  margin: 15px 0;
 }
 
 .sidebar-top img {
-  width: 100px;
+  width: 100px; 
   height: auto;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .sidebar-bottom {
@@ -31,10 +36,10 @@
 }
 
 .sidebar-bottom li {
-  padding: 25px 0px;
-  padding-left: 45px;
+  padding: 18px 0;
+  padding-left: 40px; 
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold; 
   text-align: left;
   transition: all 0.25s ease;
@@ -43,14 +48,16 @@
 
 .sidebar-bottom li:hover {
   background-color: hsl(216, 17%, 72%);
-  color:  #002f6c;
+  color: #002f6c;
   border-top-left-radius: 50px;  
   border-bottom-left-radius: 50px; 
 }
 
 .sidebar-bottom li.active {
   background: white;
-  color:  #002f6c;
-  border-top-left-radius: 50px;  
-  border-bottom-left-radius: 50px; 
+  color: #002f6c;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  position: relative;
 }
+

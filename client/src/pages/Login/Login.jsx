@@ -1,41 +1,123 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
-  const [showLogin, setShowLogin] = useState(false);
+  const [activePanel, setActivePanel] = useState(null);
+  const [isNavigatingToRegister, setIsNavigatingToRegister] = useState(false);
+  const navigate = useNavigate();
 
   const handleShowLogin = () => {
-    setShowLogin(true);
+    setActivePanel('login');
+  };
+
+  const handleShowInfo = () => {
+    setActivePanel('info');
+  };
+
+  const handleGoBack = () => {
+    setActivePanel(null);
+  };
+
+  const handleShowRegister = () => {
+    setIsNavigatingToRegister(true);
+    setTimeout(() => {
+      navigate("/register");
+    }, 500);
   };
 
   return (
-    <div className="login-wrapper">
-      <div className={`left-side ${showLogin ? 'shrink' : ''}`}>
-        <img src="/images/logo.jpg" alt="Illustration" className="illustration" />
+    <div className={`login-wrapper ${isNavigatingToRegister ? 'move-out' : ''}`}>
+      <div className={`left-side ${activePanel ? 'shrink' : ''}`}>
+        <img src="/images/logo.jpg" alt="Logo" className="illustration" />
         <h2>TRUNG TÂM QUẢN LÝ KTX<br />PHÁP VÂN - TỨ HIỆP</h2>
-        {!showLogin && (
-          <button className="start-login-btn" onClick={handleShowLogin}>
-            Đăng nhập
-          </button>
+        {(activePanel || isNavigatingToRegister) && (
+          <button className="back-btn" onClick={handleGoBack}>←</button>
+        )}
+        {!activePanel && (
+          <>
+            <button className="start-login-btn" onClick={handleShowLogin}>
+              Dành cho ban quản lý và sinh viên đã thuê phòng
+            </button>
+            <button className="start-login-btn" onClick={handleShowInfo}>
+              Dành cho sinh viên có nhu cầu thuê phòng
+            </button>
+          </>
         )}
       </div>
-
-      <div className={`right-side ${showLogin ? 'slide-in' : ''}`}>
-        <h2>ĐĂNG NHẬP</h2>
-        <input type="email" placeholder="Email" />
-        <input type="password" placeholder="Password" />
+      <form action="/dashboard"  method="POST" >
+      <div className={`right-side ${activePanel === 'login' ? 'slide-in' : ''}`}>
+        <h2>CHÀO MỪNG ĐẾN VỚI KÍ TÚC XÁ PHÁP VÂN - TỮ HIỆP</h2>
+        <input type="email" placeholder="Email" name="email" />
+        <input type="password" placeholder="Password" name="password" />
         <div className="options">
           <a href="#">Quên mật khẩu?</a>
         </div>
         <div className="buttons">
-          <button className="login-btn">Login</button>
-          <button className="register-btn">Register</button>
+          <button type = "submit" className="login-btn">Đăng Nhập</button>
         </div>
+      </div>
+      </form>
+
+      <div className={`right-side ${activePanel === 'info' ? 'slide-in' : ''}`}>
+        <h2>THÔNG TIN ĐĂNG KÝ</h2>
+        <div className="info-content">
+          <div className="info-section">
+            <h3>1. Phòng ở</h3>
+            <ul>
+              <li>Diện tích: 56.9m², khép kín.</li>
+              <li>Trang bị: Giường tầng, bàn học, tủ đồ có khóa, bồn rửa, vệ sinh riêng, vòi sen, bình nóng lạnh.</li>
+              <li>Thiết bị thêm theo nhu cầu: Tủ lạnh, máy giặt.</li>
+            </ul>
+          </div>
+
+          <div className="info-section">
+            <h3>2. Dịch vụ tiện ích</h3>
+            <ul>
+              <li>Canteen, siêu thị, nhà thuốc.</li>
+              <li>Khu thể thao: bóng rổ, bóng chuyền, gym,...</li>
+            </ul>
+          </div>
+
+          <div className="info-section">
+            <h3>3. Chi phí</h3>
+            <ul>
+              <li>Phòng 8 người: 205.000đ/tháng.</li>
+              <li>Phòng 4 người: 410.000đ/tháng.</li>
+              <li>Điện, nước giá nhà nước, có đồng hồ riêng.</li>
+              <li>Internet: Từ 200.000đ/tháng.</li>
+              <li>Gửi xe: 45.000 – 70.000đ/tháng.</li>
+            </ul>
+          </div>
+
+          <div className="info-section">
+            <h3>4. Giao thông</h3>
+            <p>Các tuyến bus tại cổng KTX: 60A, 21B, 99,... và các tuyến gần khác: 04, 08B, 12,...</p>
+          </div>
+
+          <div className="info-section">
+            <h3>5. Hoạt động</h3>
+            <ul>
+              <li>Văn nghệ, thể thao, trung thu, ngày hội hiến máu,...</li>
+            </ul>
+          </div>
+
+          <div className="info-section">
+            <h3>6. Hồ sơ đăng ký</h3>
+            <ul>
+              <li>Đơn đăng ký (có xác nhận): 1 bản gốc + 1 photo.</li>
+              <li>CCCD: 2 bản photo.</li>
+              <li>Giấy xác nhận/Thẻ SV: 1 bản gốc + 1 photo.</li>
+              <li>02 ảnh 3×4.</li>
+            </ul>
+            <p><strong>Nộp hồ sơ trực tiếp tại:</strong> Tầng 1 nhà A6 - Khu nhà ở SV Pháp Vân - Tứ Hiệp, đường Trần Thủ Độ, Hoàng Mai, Hà Nội.</p>
+          </div>
+        </div>
+
+        <button className="login-btn" onClick={handleShowRegister}>Đăng ký</button>
       </div>
     </div>
   );
 };
 
 export default Login;
-
-

@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import "./Navbar.css";
-
+import {Link} from 'react-router-dom';
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [hideNavbar, setHideNavbar] = useState(false);
@@ -41,10 +41,10 @@ const Navbar = () => {
     <div className={`navbar ${isSticky ? 'sticky' : ''} ${hideNavbar ? 'hide-navbar' : ''}`}>
       <div className="navbar_container">
         <div className="navbar_container_left">
-          <img className='image' src="/images/thuonghieuanh.png" alt="logo" />
+          <Link to="/"><img className='image' src="/images/thuonghieuanh.png" alt="logo" /></Link>
         </div>
         <ul className="navbar_container_right">
-          <li><a href="#">Trang chủ</a></li>
+          <li><Link to ="/"><a href="#">Trang chủ</a></Link></li>
           <li className="dropdown">
             <a href="#">Giới Thiệu ▾</a>
             <ul className="dropdown_menu">
@@ -86,7 +86,7 @@ const Navbar = () => {
             </ul>
           </li>
           <li><a href="#">Liên hệ</a></li>
-          <li><a href="#">&#128101;</a></li>
+          <li><Link to="/login"><a href="">&#128101;</a></Link></li>
         </ul>
       </div>
     </div>
