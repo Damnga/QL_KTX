@@ -25,6 +25,20 @@ const Login = () => {
       navigate("/register");
     }, 500);
   };
+  const handleLogin = (e) => {
+    e.preventDefault();
+  
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value;
+  
+    if (email === "admin") {
+      navigate("/admin/dashboard");
+    } else if (email === "user") {
+      navigate("/user/home");
+    } else {
+      alert("Email không hợp lệ hoặc chưa được cấp quyền đăng nhập.");
+    }
+  };
 
   return (
     <div className={`login-wrapper ${isNavigatingToRegister ? 'move-out' : ''}`}>
@@ -45,10 +59,10 @@ const Login = () => {
           </>
         )}
       </div>
-      <form action="/dashboard"  method="POST" >
+      <form onSubmit={handleLogin} >
       <div className={`right-side ${activePanel === 'login' ? 'slide-in' : ''}`}>
         <h2>CHÀO MỪNG ĐẾN VỚI KÍ TÚC XÁ PHÁP VÂN - TỮ HIỆP</h2>
-        <input type="email" placeholder="Email" name="email" />
+        <input type="text" placeholder="Email" name="email" />
         <input type="password" placeholder="Password" name="password" />
         <div className="options">
           <a href="#">Quên mật khẩu?</a>

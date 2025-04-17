@@ -54,7 +54,7 @@ const Header = () => {
   )}
 </div>
 
-          <span className="hotline">Tổng đài: <span className="hotline_number">1900.1900</span></span>
+        <span className="hotline">Tổng đài: <span className="hotline_number">1900.1900</span></span>
         </div>
         <div className="header_center">
           <a href="#support">Hỗ trợ đăng ký phòng ở</a>
