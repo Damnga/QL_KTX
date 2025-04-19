@@ -10,6 +10,7 @@ const Sidebar = ({ setMenu }) => {
     { name: 'Trang Chủ', path: '/admin/dashboard' },
     { name: 'Quản Lý Phòng Ở', path: '/admin/room_management' },
     { name: 'Quản Lý Sinh Viên', path: '/admin/user_management' },
+    { name: 'Quản Lý Hợp Đồng', path: '/admin/contract_management' },
     { name: 'Thanh Toán Hóa Đơn', path: '/admin/invoice_management' },
     { name: 'Quản Lý Dịch Vụ', path: '/admin/service_management' },
     { name: 'Bài Viết', path: '/admin/post' },

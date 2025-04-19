@@ -12,6 +12,7 @@ import InvoiceManage from './pages/InvoiceManage/Invoicemanage';
 import Post from './pages/Post/Post';
 import Notification from './pages/Notification/Notification';
 import Event from './pages/Event/Event';
+import Contract from './pages/ContractManage/Contractmanage';
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/admin/dashboard" element={<Dashboard/>} />
           <Route path="/admin/room_management" element={<Roommanage/>} />
           <Route path="/admin/user_management" element={<Usermanage/>} />
+          <Route path="/admin/contract_management" element={<Contract/>} />
           <Route path="/admin/invoice_management" element={<InvoiceManage/>} />
           <Route path="/admin/service_management" element={<ServiceManage/>} />
           <Route path="/admin/post" element={<Post/>} />

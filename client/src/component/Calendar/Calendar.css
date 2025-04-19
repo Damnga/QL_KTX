@@ -1,11 +1,13 @@
 .calendar-container {
-    max-width: 400px;
-    margin: 40px auto;
+    width: 450px;
     padding: 20px;
     background: white;
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     font-family: sans-serif;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    height:300px;
   }
   
   .calendar-header {

@@ -7,7 +7,6 @@ const Header_admin = () => {
        <span className="current-page">Dashboard</span>
       </div>
       <div className="header-controls">
-        <input type="text" placeholder="Type here..." className="search-input" />
         <span className="icon">⚙️</span>
         <span className="icon">👤</span>
       </div>
