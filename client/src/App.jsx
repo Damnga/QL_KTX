@@ -13,6 +13,9 @@ import Post from './pages/Post/Post';
 import Notification from './pages/Notification/Notification';
 import Event from './pages/Event/Event';
 import Contract from './pages/ContractManage/Contractmanage';
+import Home from './pages/Home/Home';
+import User from './layout/User';
+import Chatuser from './pages/Chat_user/Chatuser';
 function App() {
   return (
     <>
@@ -31,6 +34,11 @@ function App() {
           <Route path="/admin/notification" element={<Notification/>} />
           <Route path="/admin/event" element={<Event/>} />
         </Route>
+        <Route element={<User/>}>
+          <Route path="/user/home" element={<Home/>} />
+          <Route path="/user/messages" element={<Chatuser/>} />
+        </Route>
+        
       </Routes>
     </>
   )

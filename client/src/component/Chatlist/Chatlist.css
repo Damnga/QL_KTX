@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .app-container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .chat-list {
+    width: 300px;
+    border-right: 1px solid #ddd;
+    padding: 15px;
+    background: #f8f8f8;
+    overflow-y: auto;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .chat-user {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+  
+  .chat-user:hover {
+    background-color: #e8f0ff;
+  }
+  
+  .chat-user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .chat-user-name {
+    font-weight: bold;
+  }
+  
+  .chat-status {
+    font-size: 12px;
+    color: gray;
+  }
+  
+  .chat-status.online {
+    color: green;
+  }
+  .chat-status.away {
+    color: orange;
+  }
+  .chat-status.busy {
+    color: red;
+  }
+  .chat-status.offline {
+    color: gray;
+  }
+  
+  .chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .chat-header {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .chat-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  
+  .chat-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #fafafa;
+  }
+  
+  .chat-message {
+    max-width: 60%;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #e7f1ff;
+  }
+  
+  .chat-message.me {
+    align-self: flex-end;
+    background-color: #dfeaff;
+  }
+  
+  .chat-message.you {
+    align-self: flex-start;
+  }
+  
+  .chat-footer {
+    padding: 10px;
+    display: flex;
+    border-top: 1px solid #ddd;
+  }
+  
+  .chat-footer input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+  }
+  
+  .chat-footer button {
+    background-color: #a78bfa;
+    border: none;
+    margin-left: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
