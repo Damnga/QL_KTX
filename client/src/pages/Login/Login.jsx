@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Login.css';
 
 const Login = () => {
   const [activePanel, setActivePanel] = useState(null);
   const [isNavigatingToRegister, setIsNavigatingToRegister] = useState(false);
+  const [studentId, setStudentId] = useState('');
+  const [lookupResult, setLookupResult] = useState(null);
+
   const navigate = useNavigate();
+  const location = useLocation(); 
+
+  useEffect(() => {
+    if (location.state?.activePanel) {
+      setActivePanel(location.state.activePanel);
+    }
+  }, [location.state]);
 
   const handleShowLogin = () => {
     setActivePanel('login');
@@ -17,6 +27,8 @@ const Login = () => {
 
   const handleGoBack = () => {
     setActivePanel(null);
+    setLookupResult(null);
+    setStudentId('');
   };
 
   const handleShowRegister = () => {
@@ -25,18 +37,36 @@ const Login = () => {
       navigate("/register");
     }, 500);
   };
+
+  const handleShowLookupInfo = () => {
+    setActivePanel('lookup');
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
-  
     const email = e.target.email.value.trim();
     const password = e.target.password.value;
-  
+
     if (email === "admin") {
       navigate("/admin/dashboard");
     } else if (email === "user") {
       navigate("/user/home");
     } else {
       alert("Email không hợp lệ hoặc chưa được cấp quyền đăng nhập.");
+    }
+  };
+
+  const handleLookupSubmit = (e) => {
+    e.preventDefault();
+    if (studentId === '123456') {
+      setLookupResult({
+        name: 'Nguyễn Văn A',
+        status: 'Đã duyệt',
+        room: 'P204 - A6',
+        phone: '0123456789',
+      });
+    } else {
+      setLookupResult({ error: 'Không tìm thấy hồ sơ.' });
     }
   };
 
@@ -59,20 +89,23 @@ const Login = () => {
           </>
         )}
       </div>
-      <form onSubmit={handleLogin} >
-      <div className={`right-side ${activePanel === 'login' ? 'slide-in' : ''}`}>
-        <h2>CHÀO MỪNG ĐẾN VỚI KÍ TÚC XÁ PHÁP VÂN - TỮ HIỆP</h2>
-        <input type="text" placeholder="Email" name="email" />
-        <input type="password" placeholder="Password" name="password" />
-        <div className="options">
-          <a href="#">Quên mật khẩu?</a>
+
+      {/* Panel: Đăng nhập */}
+      <form onSubmit={handleLogin}>
+        <div className={`right-side ${activePanel === 'login' ? 'slide-in' : ''}`}>
+          <h2>CHÀO MỪNG ĐẾN VỚI KÍ TÚC XÁ PHÁP VÂN - TỪ HIỆP</h2>
+          <input type="text" placeholder="Email" name="email" />
+          <input type="password" placeholder="Password" name="password" />
+          <div className="options">
+            <a href="#">Quên mật khẩu?</a>
+          </div>
+          <div className="buttons">
+            <button type="submit" className="login-btn">Đăng Nhập</button>
+          </div>
         </div>
-        <div className="buttons">
-          <button type = "submit" className="login-btn">Đăng Nhập</button>
-        </div>
-      </div>
       </form>
 
+      {/* Panel: Thông tin thuê phòng */}
       <div className={`right-side ${activePanel === 'info' ? 'slide-in' : ''}`}>
         <h2>THÔNG TIN ĐĂNG KÝ</h2>
         <div className="info-content">
@@ -84,7 +117,6 @@ const Login = () => {
               <li>Thiết bị thêm theo nhu cầu: Tủ lạnh, máy giặt.</li>
             </ul>
           </div>
-
           <div className="info-section">
             <h3>2. Dịch vụ tiện ích</h3>
             <ul>
@@ -92,7 +124,6 @@ const Login = () => {
               <li>Khu thể thao: bóng rổ, bóng chuyền, gym,...</li>
             </ul>
           </div>
-
           <div className="info-section">
             <h3>3. Chi phí</h3>
             <ul>
@@ -103,19 +134,16 @@ const Login = () => {
               <li>Gửi xe: 45.000 – 70.000đ/tháng.</li>
             </ul>
           </div>
-
           <div className="info-section">
             <h3>4. Giao thông</h3>
             <p>Các tuyến bus tại cổng KTX: 60A, 21B, 99,... và các tuyến gần khác: 04, 08B, 12,...</p>
           </div>
-
           <div className="info-section">
             <h3>5. Hoạt động</h3>
             <ul>
               <li>Văn nghệ, thể thao, trung thu, ngày hội hiến máu,...</li>
             </ul>
           </div>
-
           <div className="info-section">
             <h3>6. Hồ sơ đăng ký</h3>
             <ul>
@@ -127,8 +155,39 @@ const Login = () => {
             <p><strong>Nộp hồ sơ trực tiếp tại:</strong> Tầng 1 nhà A6 - Khu nhà ở SV Pháp Vân - Tứ Hiệp, đường Trần Thủ Độ, Hoàng Mai, Hà Nội.</p>
           </div>
         </div>
+        <div className="btnbtn">
+          <button className="login-btn" onClick={handleShowRegister}>Đăng ký</button>
+          <button className="login-btn" onClick={handleShowLookupInfo}>Tra cứu hồ sơ</button>
+        </div>
+      </div>
 
-        <button className="login-btn" onClick={handleShowRegister}>Đăng ký</button>
+      {/* Panel: Tra cứu hồ sơ */}
+      <div className={`right-side ${activePanel === 'lookup' ? 'slide-in' : ''}`}>
+        <h2>TRA CỨU HỒ SƠ ĐĂNG KÝ</h2>
+        <form onSubmit={handleLookupSubmit} className="lookup-form">
+          <input
+            type="text"
+            placeholder="Nhập mã sinh viên"
+            value={studentId}
+            onChange={(e) => setStudentId(e.target.value)}
+            required
+          />
+          <button type="submit" className="login-btn">Tra cứu</button>
+        </form>
+        {lookupResult && (
+          <div className="result-box">
+            {lookupResult.error ? (
+              <p className="error">{lookupResult.error}</p>
+            ) : (
+              <>
+                <p><strong>Họ tên:</strong> {lookupResult.name}</p>
+                <p><strong>Tình trạng:</strong> {lookupResult.status}</p>
+                <p><strong>Phòng:</strong> {lookupResult.room}</p>
+                <p><strong>SĐT:</strong> {lookupResult.phone}</p>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,21 +1,24 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import Intro from './pages/Intro/Intro';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-import Dashboard from './pages/Dashboard/Dashboard';
+import Dashboard from './pages/Admin/Dashboard/Dashboard';
 import Admin from './layout/Admin';
-import Roommanage from './pages/RoomManage/Roommanage';
-import Usermanage from './pages/UserManage/Usermanage';
-import ServiceManage from './pages/ServiceManage/Servicemanage';
-import InvoiceManage from './pages/InvoiceManage/Invoicemanage';
-import Post from './pages/Post/Post';
-import Notification from './pages/Notification/Notification';
-import Event from './pages/Event/Event';
-import Contract from './pages/ContractManage/Contractmanage';
-import Home from './pages/Home/Home';
 import User from './layout/User';
-import Chatuser from './pages/Chat_user/Chatuser';
+import AccountManagment from "./pages/Admin/AccountManagment/AccountManagment";
+import BillManagment from "./pages/Admin/BillManagment/BillManagment"
+import EventPost from "./pages/Admin/EventPost/EventPost"
+import Notification from "./pages/Admin/Notification/Notification"
+import RoomManagment from "./pages/Admin/RoomManagment/RoomManagment"
+import ServiceManagment from "./pages/Admin/ServiceManagment/ServiceManagment";
+import UserManagment from "./pages/Admin/UserManagment/UserManagment";
+import Home from "./pages/User/Home/Home";
+import LakeProfile from "./pages/User/LakeProfile/LakeProfile";
+import Message from "./pages/User/Message/Message";
+import Noti from "./pages/User/Noti/Noti";
+import LookupInfo from "./pages/LookupInfo/LookupInfo"
+
 function App() {
   return (
     <>
@@ -23,22 +26,23 @@ function App() {
         <Route path="/" element={<Intro/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/register" element={<Register/>} />
+        <Route path="/LookupInfo" element={<LookupInfo/>} />
         <Route element={<Admin />}>
           <Route path="/admin/dashboard" element={<Dashboard/>} />
-          <Route path="/admin/room_management" element={<Roommanage/>} />
-          <Route path="/admin/user_management" element={<Usermanage/>} />
-          <Route path="/admin/contract_management" element={<Contract/>} />
-          <Route path="/admin/invoice_management" element={<InvoiceManage/>} />
-          <Route path="/admin/service_management" element={<ServiceManage/>} />
-          <Route path="/admin/post" element={<Post/>} />
+          <Route path="/admin/account_management" element={<AccountManagment/>} />
+          <Route path="/admin/bill_management" element={<BillManagment/>} />
+          <Route path="/admin/post" element={<EventPost/>} />
           <Route path="/admin/notification" element={<Notification/>} />
-          <Route path="/admin/event" element={<Event/>} />
+          <Route path="/admin/room_management" element={<RoomManagment/>} />
+          <Route path="/admin/service_management" element={<ServiceManagment/>} />
+          <Route path="/admin/user_management" element={<UserManagment/>} />
         </Route>
         <Route element={<User/>}>
           <Route path="/user/home" element={<Home/>} />
-          <Route path="/user/messages" element={<Chatuser/>} />
+          <Route path="/user/profile" element={<LakeProfile/>} />
+          <Route path="/user/message" element={<Message/>} />
+          <Route path="/user/notification" element={<Noti/>} />
         </Route>
-        
       </Routes>
     </>
   )

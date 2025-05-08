@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState} from 'react'
 import CountUp from 'react-countup'
 import "./Intro.css";
 import Navbar from "../../component/Navbar/Navbar";
@@ -8,7 +8,7 @@ import Footer from "../../component/Footer/Footer";
 import Banner from "../../component/Banner/Banner";
 const Intro = () => {
   const containerRef = useRef(null)
-    const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
     useEffect(() => {
       const observer = new IntersectionObserver(
         ([entry]) => {

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './Register.css';
 import Stepprogress from "../../component/StepProgress/Stepprogress";
-
+import { Link, useNavigate } from 'react-router-dom';
 const Register = () => {
   const [step, setStep] = useState(0);
+  const navigate = useNavigate();
+  const [isRegistered, setIsRegistered] = useState(false); 
   const [formData, setFormData] = useState({
     account: '',
     name: '',
@@ -18,8 +20,13 @@ const Register = () => {
   const handleChange = (field) => (e) => {
     setFormData({ ...formData, [field]: e.target.value });
   };
-
-  // Validation từng bước
+  const handleNext = () => {
+    if (step === 5) {
+      setIsRegistered(true); 
+    } else {
+      setStep((s) => Math.min(5, s + 1));
+    }
+  };
   const isStepValid = () => {
     switch (step) {
       case 0:
@@ -27,9 +34,9 @@ const Register = () => {
       case 1:
         return formData.name.trim() !== '';
       case 2:
-        return formData.email.includes('@') && formData.phone.trim().length >= 9;
+        return formData.email.trim() && formData.phone.trim();
       case 3:
-        return formData.username && formData.password.length >= 6;
+        return formData.username && formData.password;
       case 4:
         return formData.password === formData.confirmPassword && formData.securityAnswer.trim() !== '';
       case 5:
@@ -42,7 +49,6 @@ const Register = () => {
   return (
     <div >
       <Stepprogress currentStep={step} />
-
       <div className="step-form">
         {step === 0 && (
           <div>
@@ -130,12 +136,21 @@ const Register = () => {
           ← Quay lại
         </button>
         <button
-          onClick={() => setStep((s) => Math.min(5, s + 1))}
+          onClick={handleNext}
           disabled={!isStepValid()}
         >
           {step === 5 ? 'Hoàn tất' : 'Tiếp →'}
         </button>
       </div>
+      {isRegistered && (
+        <div className="modal">
+          <div className="modal-content">
+            <h2>🎉 Đăng ký thành công!</h2>
+            <p>Chúc mừng bạn đã đăng ký thành công. Vui lòng đăng nhập để theo dõi trạng thái hồ sơ của bạn.</p>
+            <button onClick={() => {setIsRegistered(false);navigate('/login', { state: { activePanel: 'info' } });}}>Đóng</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

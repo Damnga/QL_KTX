@@ -218,3 +218,39 @@ body {
   margin-left: 10px;
   color: #444;
 }
+.btnbtn{
+  display: flex;
+  gap:20px;
+}
+
+
+.lookup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.lookup-form input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.result-box {
+  margin-top: 20px;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.result-box p {
+  margin: 5px 0;
+}
+
+.result-box .error {
+  color: red;
+  font-weight: bold;
+}

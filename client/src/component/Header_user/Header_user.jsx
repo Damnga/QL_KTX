@@ -18,9 +18,8 @@ const Header_user = () => {
   }, []);
 
   const handleLogout = () => {
-    // Xử lý đăng xuất ở đây (xóa token, chuyển trang...)
     alert("Đăng xuất thành công!");
-    navigate('/login');
+    navigate('/');
   };
 
   return (
@@ -34,14 +33,14 @@ const Header_user = () => {
         <div className="header_user_right">
           <ul>
             <li><Link to="/user/home">Trang Chủ</Link></li>
-            <li><Link to="/user/notifications">Thông Báo</Link></li>
-            <li><Link to="/user/messages">Tin Nhắn</Link></li>
+            <li><Link to="/user/notification">Thông Báo</Link></li>
+            <li><Link to="/user/message">Tin Nhắn</Link></li>
           </ul>
           <div className="user-icon" onClick={() => setShowMenu(!showMenu)}>
             &#128101;
             {showMenu && (
               <div className="user-menu" ref={menuRef}>
-                <p onClick={() => navigate('/user/profile')}>Trang cá nhân</p>
+                <p onClick={() => navigate('/user/profile')}>Thông tin cá nhân</p>
                 <p onClick={handleLogout}>Đăng xuất</p>
               </div>
             )}

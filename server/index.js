@@ -1,7 +1,8 @@
 import express from 'express';
 import session from 'express-session';
 import dotenv from 'dotenv';
-import userRoutes from './routes/post.js';
+import userRoutes from './route/post.js';
+import ToaNhaRoutes from './route/toanha.js';
 import cors from 'cors';
 dotenv.config();
 const app = express();
@@ -14,5 +15,6 @@ app.use(session({
   saveUninitialized: true,
 }));
 app.use('/', userRoutes);
-const PORT = process.env.PORT || 3000;
+app.use('/toa_nha',ToaNhaRoutes);
+const PORT = 3000;
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
