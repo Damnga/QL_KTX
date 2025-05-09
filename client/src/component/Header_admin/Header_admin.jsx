@@ -1,11 +1,21 @@
 import React from 'react'
 import "./Header_admin.css"
 import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../../routes/TaiKhoan';
 const Header_admin = () => {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    alert("Đăng xuất thành công!");
-    navigate('/');
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    const confirmLogout = window.confirm("Bạn có chắc chắn muốn đăng xuất không?");
+    if (!confirmLogout) return;
+  
+    try {
+      await logout();
+      navigate('/');
+    } catch (err) {
+      alert(err.message || "Lỗi khi đăng xuất");
+      console.error(err);
+    }
   };
   return (
     <header className="custom-header">

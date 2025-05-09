@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Login.css';
-
+import {login} from "../../routes/TaiKhoan"
 const Login = () => {
   const [activePanel, setActivePanel] = useState(null);
   const [isNavigatingToRegister, setIsNavigatingToRegister] = useState(false);
   const [studentId, setStudentId] = useState('');
   const [lookupResult, setLookupResult] = useState(null);
-
   const navigate = useNavigate();
   const location = useLocation(); 
 
@@ -42,17 +41,22 @@ const Login = () => {
     setActivePanel('lookup');
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value.trim();
-    const password = e.target.password.value;
-
-    if (email === "admin") {
-      navigate("/admin/dashboard");
-    } else if (email === "user") {
-      navigate("/user/home");
-    } else {
-      alert("Email không hợp lệ hoặc chưa được cấp quyền đăng nhập.");
+    const Email = e.target.Email.value.trim();
+    const Password = e.target.Password.value;
+    try {
+      const data = await login(Email, Password);
+      if (data.MaPQ === 1) {
+        navigate("/admin/dashboard");
+      } else if (data.MaPQ === 4) {
+        navigate("/user/home");
+      } else {
+        alert("Không xác định quyền truy cập.");
+      }
+    } catch (err) {
+      alert(err.message || "Đăng nhập thất bại");
+      console.error(err);
     }
   };
 
@@ -94,8 +98,8 @@ const Login = () => {
       <form onSubmit={handleLogin}>
         <div className={`right-side ${activePanel === 'login' ? 'slide-in' : ''}`}>
           <h2>CHÀO MỪNG ĐẾN VỚI KÍ TÚC XÁ PHÁP VÂN - TỪ HIỆP</h2>
-          <input type="text" placeholder="Email" name="email" />
-          <input type="password" placeholder="Password" name="password" />
+          <input type="text" placeholder="Email" name="Email" />
+          <input type="password" placeholder="Password" name="Password" />
           <div className="options">
             <a href="#">Quên mật khẩu?</a>
           </div>

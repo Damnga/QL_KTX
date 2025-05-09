@@ -1,11 +1,12 @@
 import express from 'express';
-import {create,getData,getDataId,update,remove } from '../controller/toanha.js';
-import { verifyToken } from '../middleware/auth.js';
+import upload from '../middleware/multer.js';
+import {create,getToaNha,getToaNhaId,update,remove} from "../controller/ToanhaControler.js";
+import {authenticateToken,authorizeRoles} from "../middleware/auth.js"
 const router = express.Router();
-router.post('/create', verifyToken,create);
-router.get('/', verifyToken, getData);
-router.get('/:id', verifyToken, getDataId);
-router.put('/:id',verifyToken, update);
-router.delete('/:id', verifyToken, remove);
+router.post('/create',create);
+router.get('/select', getToaNha);
+router.get('/:MaTN', getToaNhaId);
+router.put('/:MaTN',  update);
+router.delete('/:MaTN',  remove);
 
 export default router;
