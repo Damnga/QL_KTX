@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/edca9ca3-6eee-4f9a-ad14-e130b9ba5af7)# 🏢 Hệ thống Quản lý Ký túc xá (KTX)
 
 Đây là dự án xây dựng hệ thống **Quản lý Ký túc xá** nhằm hỗ trợ Ban quản lý trong việc quản lý thông tin sinh viên, phòng ở, quá trình đăng ký, bảo trì, vi phạm nội quy, và các tác vụ liên quan một cách hiệu quả, nhanh chóng và chính xác.
 
@@ -50,3 +49,9 @@ cd client
 npm install
 # Khởi chạy frontend
 npm start
+
+![image](https://github.com/user-attachments/assets/edca9ca3-6eee-4f9a-ad14-e130b9ba5af7)
+![giaodienchinh](https://github.com/user-attachments/assets/93077828-9615-4a65-8daa-6449f4c1889d)
+![giaodiendangnhap](https://github.com/user-attachments/assets/1108817d-8e05-4aa7-832a-b2565c04b8d5)
+![giaodiennguoidung](https://github.com/user-attachments/assets/9beb63d4-2f7e-454d-918b-7a29675a1a68)
+![giaodienquanlyphong](https://github.com/user-attachments/assets/7078ea61-179e-4a13-b6e2-10e1bab51df2)
