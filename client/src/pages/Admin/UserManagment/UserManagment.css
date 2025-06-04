@@ -1,0 +1,395 @@
+.user{
+    background: linear-gradient(to bottom, #4b79a1, #002f6c);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.user_container{
+    background-color: white;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 290px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 50px;
+    padding-top: 20px;
+}
+.room_button{
+    display: flex;
+    gap:20px;
+    height:75px;
+    margin-top: 20px;
+    justify-content: center;
+}
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.btn:hover {
+  background-color: #ddd;
+}
+
+
+.room_table::-webkit-scrollbar {
+    display: none;
+}
+.top-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+    margin-top: 20px;
+
+  }
+  .search {
+    margin-left: auto;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 200px;
+    margin-right: 30px;
+  }
+  
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+  }
+  
+  th, td {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    text-align: left;
+  }
+  th{
+    text-align: center;
+  }
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+ 
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+ .modal-content-user {
+    
+    padding:0 20px;
+    border-radius: 50px;
+    width:1240px;
+    height:900px;
+  }
+
+
+ .a{
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .a:hover {
+    background-color: #ddd;
+  }
+
+  .profile-container-user {
+    width: 1240px;
+    margin: auto;
+    display: flex;
+    gap: 20px;
+    height:800px;
+    border-radius: 16px;
+
+
+  }
+
+  .profile-sidebar-user {
+    width: 260px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 50px;
+    margin-top: 20px;
+
+  }
+  
+  .profile-infor-user {
+    background-color: white;
+    border-radius: 50px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 2px 2px 8px gray;
+    height:820px;
+  }
+  
+  .profile-avatar {
+    width: 200px;
+    height: 230px;
+    border-radius: 16PX;
+    margin-top: 10px;
+  }
+  
+  .profile-id {
+    color: #007bff;
+    font-size: 16px;
+    margin: 8px 0 4px;
+  }
+  
+  .profile-status {
+    color: green;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .info {
+    text-align: left;
+    font-size: 14px;
+    line-height: 1.8;
+    padding-left: 10px;
+  }
+  .info strong {
+    text-align: center;
+    font-size: 24px;
+    padding-left: 20px;
+  }
+  
+  .join-date {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    text-align: center;
+    padding-left: 10px;
+  }
+
+  .profile-component-user {
+    flex: 1;
+    background-color: white;
+    border-radius: 50px;
+    padding:20px 30px;
+    box-shadow: 2px 2px 8px gray;
+    height:820px;
+    overflow-y: auto;
+    margin-top: 20px;
+    
+  }
+  .profile-component-user::-webkit-scrollbar {
+    display: none;
+  }
+
+  .contract-component{
+    background-color: #f0f2f5;
+    font-weight: 600;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+        border-radius: 50px;
+
+  }
+  .bill-component{
+    background-color: #f0f2f5;
+    font-weight: 600;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .service-component{
+    background-color: #f0f2f5;
+    font-weight: 600;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .support-component{
+    background-color: #f0f2f5;
+    font-weight: 600;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .relative-component{
+    background-color: #f0f2f5;
+    font-weight: 600;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .history-component{
+    background-color: #f0f2f5;
+    font-weight: 600;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .discipline-component{
+    background-color: #f0f2f5;
+    font-weight: 600;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .room-component{
+    background-color: #f0f2f5;
+    font-weight: 600;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+.contract-component{
+    background-color: #f0f2f5;
+    font-weight: 600;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 15px 20px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+.infor-component.expanded {
+    background-color: #e0e6eb;
+  }
+  
+.expand-content {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  }
+.expand-buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.expand-btn {
+  padding: 8px 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+.expand-btn:hover {
+  background-color: #0056b3;
+}
+
+.logout-admin{
+  margin-top: 10px;
+  width:200px;
+  height:50px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 20px;
+  background-color: #007bff;
+  color: white;
+}
+
+
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.dialog-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: auto;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: crimson;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.file-link {
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}

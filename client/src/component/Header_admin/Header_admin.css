@@ -1,0 +1,40 @@
+.custom-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 24px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+  }
+  
+  .breadcrumb {
+    font-size: 14px;
+    margin-left: 15px;
+  }
+  
+  .current-page {
+    color: #333;
+    font-weight: 500;
+  }
+  
+  .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .search-input {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+  }
+  
+  .icon {
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+
+ 

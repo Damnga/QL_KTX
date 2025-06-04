@@ -1,0 +1,102 @@
+.header_container{
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    width: 1240px;
+    margin: 0 auto;
+  }
+  
+  .header_left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .language {
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+  }
+  .language:hover {
+    color: red;
+  }
+  
+  .hotline {
+    font-size: 14px;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .hotline_number {
+    color: red;
+    font-weight: bold;
+    font-weight: 1000;
+  }
+  
+  .header_center a {
+    margin: 0 10px;
+    font-size: 16px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .header_center a:hover {
+    color: red;
+  }
+  
+  .header_right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search_bar {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none; 
+  }
+  
+  .search_button {
+    border: none;
+    background-color: #f9f9f9;
+    
+  }
+  .search_button_icon{
+    width: 14px;
+  }
+  
+  .search_button:hover {
+    cursor: pointer;
+  }
+  .language_container {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 8px;
+    top: 100%; 
+    left: 0;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .language_container p {
+    margin: 4px 0;
+    cursor: pointer;
+  }
+  .language_container p:hover{
+    margin: 4px 0;
+    cursor: pointer;
+    scale: 1.1;
+  }
+  .language_wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  
+  
