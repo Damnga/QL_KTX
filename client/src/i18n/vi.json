@@ -1,0 +1,40 @@
+{
+  "language": "Ngôn ngữ",
+  "hotline": "Tổng đài",
+  "support": "Hỗ trợ đăng ký phòng ở",
+  "jobs": "Việc làm",
+  "tour": "Tham quan KTX trực tuyến",
+
+  "dashboard": "Trang Chủ",
+
+  "introduce": "Giới thiệu",
+  "general introduce": "Giới thiệu chung",
+  "nest structure": "Cơ cấu tổ chức",
+  "general information about dormitory": "Thông tin chung về KTX",
+  "vision - mission": "Tầm nhìn - Sứ mệnh",
+  "brand identity kit": "Bộ nhận diện thương hiệu",
+  "traditional song": "Bài hát truyền thống",
+  "management council": "Hội đồng quản lý",
+  "board of directors": "Ban giám đốc",
+  "rooms on duty": "Các phòng trực thuộc",
+
+  "news and events": "Tin tức và Sự kiện",
+  "important news": "Tin tức quan trọng",
+  "news - events": "Tin tức - Sự kiện",
+  "group activities": "Hoạt động nhóm",
+
+  "internal student": "Sinh viên nội trú",
+  "forms": "Biểu mẫu",
+  "instruction information": "Thông tin hướng dẫn",
+  "frequently asked questions": "Câu hỏi thường gặp",
+  "inpatient registration": "Đăng ký nội trú",
+  "regulations": "Quy định",
+
+  "contact us": "Liên hệ",
+
+  "search": [
+    "Tìm kiếm sản phẩm...",
+    "Tìm kiếm theo mã...",
+    "Tìm kiếm theo tên..."
+  ]
+}

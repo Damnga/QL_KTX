@@ -111,13 +111,14 @@
     border-top-left-radius: 10px;
   }
 
-  .chat-body {
+  .m-chat-body {
     flex: 1;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
     overflow-y: auto;
+    background-color: #fff;
   }
   
   .message {

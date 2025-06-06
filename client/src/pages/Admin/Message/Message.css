@@ -144,7 +144,7 @@
     word-wrap: break-word;
   }
   
-  .mmess_message.them {
+  .mess_message.them {
     align-self: flex-start;
     background: var(--message-them);
   }

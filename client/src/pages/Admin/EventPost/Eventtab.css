@@ -91,3 +91,35 @@ table {
     background-color: #ddd;
   }
   
+  .trangthai {
+  text-align: center;
+  font-weight: 600;
+  user-select: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bg-green {
+  background-color: #d4edda; 
+  color: #155724; 
+}
+
+.bg-red {
+  background-color: #f8d7da; 
+  color: #721c24;
+}
+
+.bg-yellow {
+  background-color: #fff3cd; 
+  color: #856404;
+}
+
+.bg-orange {
+  background-color: #ffe5b4;
+  color: #a0522d; 
+}
+
+.bg-default {
+  background-color: #e2e3e5; 
+  color: #6c757d; 
+}

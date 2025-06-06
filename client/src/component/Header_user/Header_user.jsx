@@ -16,6 +16,7 @@ const Header_user = () => {
           <ul>
             <li><Link to="/user/home">Trang Chủ</Link></li>
             <li><Link to="/user/notification">Thông Báo</Link></li>
+            <li><Link to="/user/event">Sự Kiện</Link></li>
             <li><Link to="/user/message">Tin Nhắn</Link></li>
           </ul>
           <div className="user-icon" onClick={()=> navigate('/user/profile')}> &#128101; </div>

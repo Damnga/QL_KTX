@@ -279,7 +279,7 @@ const UserManagment = () => {
                 <div className="profile-infor-user ">
                   <div className="profile-card">
           <img src={`http://localhost:3000/uploads/${sinhvienuser.anh}`} alt="Avatar" className="profile-avatar" />
-          <p className={`trangthai ${  sinhvienuser.TrangThai === 'Đã Nhận Phòng' ? 'bg-green' :  sinhvienuser.TrangThai === 'Hết hạn' ? 'bg-red' : sinhvienuser.TrangThai === 'Sắp hết hạn' ? 'bg-yellow'  :  'bg-default'}`}>{sinhvienuser.TrangThai} </p>    
+          <p className={`trangthai ${ sinhvienuser.TrangThai === 'Đã Nhận Phòng' ? 'bg-green' :  sinhvienuser.TrangThai === 'Hết hạn' ? 'bg-red' : sinhvienuser.TrangThai === 'Sắp hết hạn' ? 'bg-yellow'  :  'bg-default'}`}>{sinhvienuser.TrangThai} </p>    
           <div className="info">
             <p><strong>{sinhvienuser.HoTen }</strong></p>
             <p>📞 {sinhvienuser.SDT}</p>

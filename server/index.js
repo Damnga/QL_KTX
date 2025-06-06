@@ -32,25 +32,44 @@ import thamgiasukienRoute from "./route/ThamGiaSuKien.js";
 import dangkythamRoute from "./route/DangKyTham.js";
 import baotriRoute from "./route/BaoTri.js";
 import thanhtoan from "./route/payment.js";
-import {updateRoomStatusJob,updateContractStatus} from "./config/cron.js";
+import {updateRoomStatusJob,updateContractStatus,updateEventStatusJob} from "./config/cron.js";
+import {backupImages}  from "./backup.js";
+import cron from 'node-cron';
+import chat from './route/openai.js';
+import chatbotRoutes from './route/chatbot.js';
 dotenv.config();
 const app = express();
 updateRoomStatusJob();
 updateContractStatus();
-const server = http.createServer(app); 
+updateEventStatusJob();
+cron.schedule('0 0 * * *', async () => {
+  console.log('[⏰] Backup mỗi ngày lúc 00:00');
+  try {
+    await backupImages();
+    console.log('Backup success');
+  } catch (err) {
+    console.error('Backup failed:', err);
+  }
+});
+const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
-    origin: "*", 
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
+
 const onlineUsers = new Map();
+
 io.on("connection", (socket) => {
-  console.log(" New client connected: ", socket.id);
+  console.log("🟢 New client connected:", socket.id);
+
   socket.on("add-user", (userId) => {
     onlineUsers.set(userId, socket.id);
-    console.log(`🟢 User ${userId} online`);
+    console.log(`✅ User ${userId} online`);
   });
+
   socket.on("send-msg", (data) => {
     const sendUserSocket = onlineUsers.get(data.to);
     if (sendUserSocket) {
@@ -60,11 +79,23 @@ io.on("connection", (socket) => {
       });
     }
   });
+
+  socket.on("ask-ai", async (message) => {
+    try {
+      const reply = await askOpenAI(message);
+      socket.emit("ai-reply", { content: reply });
+    } catch (error) {
+      console.error("❌ AI error:", error.message);
+      socket.emit("ai-reply", { content: "Lỗi AI. Vui lòng thử lại." });
+    }
+  });
+
   socket.on("disconnect", () => {
-    console.log("❌ Disconnected: ", socket.id);
-    for (let [key, value] of onlineUsers.entries()) {
-      if (value === socket.id) {
-        onlineUsers.delete(key);
+    console.log("🔴 Client disconnected:", socket.id);
+    for (let [userId, socketId] of onlineUsers.entries()) {
+      if (socketId === socket.id) {
+        onlineUsers.delete(userId);
+        console.log(`❌ User ${userId} offline`);
         break;
       }
     }
@@ -106,6 +137,8 @@ app.use('/su_kien',sukienRoute);
 app.use('/tham_gia_su_kien',thamgiasukienRoute);
 app.use('/dang_ky_tham',dangkythamRoute);
 app.use('/bao_tri',baotriRoute);
+app.use('/openai',chat);
+app.use('/chatbot', chatbotRoutes);
 app.use(errorHandler);
 const PORT = 3000;
 server.listen(PORT, () => console.log(`http://localhost:${PORT}`));

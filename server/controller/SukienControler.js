@@ -3,9 +3,9 @@ import {getAllSuKien,getAllSuKienData, getSuKienById, createSuKien, updateSuKien
 
 export const create = async (req, res, next) => {
   try {
-    const {TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc} = req.body;
+    const {TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc,TrangThai} = req.body;
     const anh = req.file?.filename || null;
-    await createSuKien({TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh});
+    await createSuKien({TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh, TrangThai});
     res.status(201).json({ message: 'Tạo su kien thành công' });
   } catch (err) {
     next(err);
@@ -42,8 +42,8 @@ export const update = async (req, res, next) => {
     try {
       const id = req.params.id;
       const anh = req.file?.filename;
-      const { TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc} = req.body;
-      await updateSuKien(id, {TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh});
+      const { TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc,TrangThai} = req.body;
+      await updateSuKien(id, {TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh,TrangThai});
       res.json({ message: 'Cập nhật su kien thành công' });
     } catch (err) {
       next(err);

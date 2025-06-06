@@ -2,12 +2,12 @@ import db from '../config/database.js';
 
 export const getAllSuKien = async () => {
   try {
-    const [rows] = await db.query('SELECT * FROM sukien');
+  const [rows] = await db.query(` SELECT sukien.id,sukien.TrangThai, sukien.TenSK, sukien.NoiDung,sukien.anh, sukien.TgianBatDau, sukien.TgianKetThuc, taikhoan.Username, COUNT(dangkysukien.id) AS SoNguoiThamGia  FROM sukien  JOIN taikhoan ON sukien.MaTK = taikhoan.id  LEFT JOIN dangkysukien ON sukien.id = dangkysukien.MaSK  GROUP BY   sukien.id,    sukien.TenSK,    sukien.NoiDung,    sukien.TgianBatDau,   sukien.TgianKetThuc,   taikhoan.Username  order by sukien.id DESC`);    
     return rows;
   } catch (error) {
     console.error('Lỗi khi lấy danh sách su kien:', error);
     throw error;
-  }
+  }x
 };
 export const getAllSuKienData = async () => {
   try {
@@ -31,10 +31,10 @@ export const getSuKienById = async (id) => {
 
 export const createSuKien = async (hoadon) => {
   try {
-    const {TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh} = hoadon;
+    const {TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh, TrangThai} = hoadon;
     await db.query(
-      'INSERT INTO sukien (TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh) VALUES (?, ?, ?, ?, ?, ?)',
-      [TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh]
+      'INSERT INTO sukien (TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh, TrangThai) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh, TrangThai]
     );
   } catch (error) {
     console.error('Error in create su kien :', error);
@@ -52,9 +52,10 @@ export const updateSuKien = async (id, newBaoTri) => {
     const TgianBatDau = newBaoTri.TgianBatDau || oldBaoTri.TgianBatDau;
     const TgianKetThuc = newBaoTri.TgianKetThuc || oldBaoTri.TgianKetThuc;
     const anh = newBaoTri.anh || oldBaoTri.anh;
+    const TrangThai = newBaoTri.TrangThai || oldBaoTri.TrangThai;
     await db.query(
-      'UPDATE sukien SET TenSK = ?, NoiDung = ?, MaTK = ?, TgianBatDau = ?, TgianKetThuc = ?, anh = ? WHERE id = ?',
-      [TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh, id]
+      'UPDATE sukien SET TenSK = ?, NoiDung = ?, MaTK = ?, TgianBatDau = ?, TgianKetThuc = ?, anh = ?, TrangThai = ? WHERE id = ?',
+      [TenSK, NoiDung, MaTK, TgianBatDau, TgianKetThuc, anh,TrangThai,  id]
     );
   } catch (error) {
     console.error('Error in update su kien: ', error);

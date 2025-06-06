@@ -20,12 +20,15 @@ import ToaNha from "./pages/Admin/RoomManagment/toanha";
 import LoaiPhong from "./pages/Admin/RoomManagment/loaiphongtab";
 import BaoTri from "./pages/Admin/RoomManagment/baotritab";
 import Event from "./pages/Admin/EventPost/Eventtab";
+import Event_user from "./pages/User/Event/Event";
 import Post from "./pages/Admin/EventPost/Posttab";
 import Message_Admin from './pages/Admin/Message/Message';
 import Support from "./pages/Admin/SupportManagement/SupportManagement";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Notification from './pages/Admin/Notification/Notification';
+import ChatWidget from './component/ChatWidget/ChatWidget';
+import Chatbot from './component/Chatbot/Chatbot';
 function App() {
   return (
     <>
@@ -56,12 +59,14 @@ function App() {
           <Route path="/user/profile" element={<LakeProfile/>} />
           <Route path="/user/message" element={<Message/>} />
           <Route path="/user/notification" element={<Noti/>} />
+          <Route path="/user/event" element={<Event_user/>} />
         </Route>
       </Routes>
       <ToastContainer position="top-right" autoClose={1000} />
+      <ChatWidget/>
+      
     </>
   )
 }
-
 export default App
 

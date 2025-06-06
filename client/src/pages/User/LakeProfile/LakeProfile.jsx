@@ -215,8 +215,6 @@ const LakeProfile = () => {
       <p>🕰️ {sinhvienuser.NienKhoa}</p>
     </div>
     <div className="join-date">
-      {/* <p className="label">Ngày nhận phòng</p>
-      <p className="date">{new Date(sinhvienuser.NgayBatDau).toLocaleDateString('vi-VN')}</p> */}
     </div>
     <button className="logout" onClick={handleLogout}>Đăng xuất</button>
             </div>

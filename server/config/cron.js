@@ -107,3 +107,37 @@ export const updateRoomStatusJob =async () => {
     }
 };
 setInterval(updateRoomStatusJob, 1000);
+
+
+export const updateEventStatusJob = async () => {
+  try {
+    const [events] = await db.query('SELECT sukien.id, TgianBatDau, TgianKetThuc FROM sukien');
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const fiveDaysLater = new Date(today);
+    fiveDaysLater.setDate(today.getDate() + 5);
+
+    for (const event of events) {
+      const start = new Date(event.TgianBatDau);
+      const end = new Date(event.TgianKetThuc);
+
+      let status = 'Chưa đến';
+
+      if (end < today) {
+        status = 'Đã diễn ra';
+      } else if (start <= today && today <= end) {
+        status = 'Đang diễn ra';
+      } else if (start <= fiveDaysLater) {
+        status = 'Sắp diễn ra';
+      }
+      await db.query('UPDATE sukien SET TrangThai = ? WHERE id = ?', [
+        status,
+        event.id,
+      ]);
+    }
+  } catch (err) {
+    console.error('🔥 Lỗi cập nhật trạng thái sự kiện:', err);
+  }
+};
+setInterval(updateEventStatusJob, 10000);
