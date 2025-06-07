@@ -2,11 +2,9 @@ import React,{useState,useEffect} from 'react'
 import "./Header.css";
 import {Search} from "lucide-react";
 import "../../i18n/i18n";
-import { useTranslation } from 'react-i18next';
-
+import { usePhongContext } from '../../context/PhongContext';
 const Header = () => {
-  const { t, i18n } = useTranslation();
-
+  const {t, changeLanguage} = usePhongContext();
   const [showLanguage, setShowLanguage] = useState(false);
   const toggleLanguage = () => setShowLanguage(!showLanguage);
   const texts = t('search', { returnObjects: true });
@@ -33,7 +31,7 @@ const Header = () => {
   }, [index, char, texts]);
 
   const handleChangeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
+    changeLanguage(lang);
     setShowLanguage(false);
   };
 

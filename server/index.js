@@ -36,7 +36,7 @@ import {updateRoomStatusJob,updateContractStatus,updateEventStatusJob} from "./c
 import {backupImages}  from "./backup.js";
 import cron from 'node-cron';
 import chat from './route/openai.js';
-import chatbotRoutes from './route/chatbot.js';
+import dangky from './route/Dangky.js';
 dotenv.config();
 const app = express();
 updateRoomStatusJob();
@@ -138,7 +138,7 @@ app.use('/tham_gia_su_kien',thamgiasukienRoute);
 app.use('/dang_ky_tham',dangkythamRoute);
 app.use('/bao_tri',baotriRoute);
 app.use('/openai',chat);
-app.use('/chatbot', chatbotRoutes);
+app.use('/dang_ky',dangky);
 app.use(errorHandler);
 const PORT = 3000;
 server.listen(PORT, () => console.log(`http://localhost:${PORT}`));

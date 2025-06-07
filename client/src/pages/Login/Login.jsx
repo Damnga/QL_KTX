@@ -4,6 +4,7 @@ import './Login.css';
 import {login,resetPassword} from "../../routes/TaiKhoan";
 import { toast } from 'react-toastify';
 import {getAllSinhVien } from "../../routes/sinhvien";
+import {getAllDangKy} from "../../routes/dangky";
 const Login = () => {
   const [activePanel, setActivePanel] = useState(null);
   const [isNavigatingToRegister, setIsNavigatingToRegister] = useState(false);
@@ -22,8 +23,9 @@ const Login = () => {
   useEffect(() => {
             const fetchStudent = async () => {
               try {
-                const datalist = await getAllSinhVien();
+                const datalist = await getAllDangKy();
                 setStudenEmail(datalist);
+                console.log("Danh sách sinh viên:", datalist);
               } catch (err) {
                 console.error('Lỗi khi tải danh sách:', err);
               } finally {

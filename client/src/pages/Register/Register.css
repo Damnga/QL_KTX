@@ -13,7 +13,12 @@
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     margin-top: 20px;
+    overflow-y: auto;
   }
+  .step-form::-webkit-scrollbar {
+    display: none;   
+  
+}
   
   .step-form input {
     display: block;
@@ -28,6 +33,7 @@
   .step-buttons {
     margin-top: 30px;
     text-align: center;
+    margin-bottom: 20px;
   }
   
   .step-buttons button {
@@ -89,4 +95,11 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  
+  .step-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: white; /* để không bị trong suốt */
+  padding: 10px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* nhẹ nhàng thôi */
+}

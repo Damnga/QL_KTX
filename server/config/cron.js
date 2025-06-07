@@ -23,9 +23,9 @@ export const updateContractStatus = async () => {
     next7Days.setDate(today.getDate() + 7);
 
     const [contractsSoonToExpire] = await db.execute(`
-      SELECT hopdong.id, Email, SDT, NgayKetThuc ,TrangThai 
+      SELECT hopdong.id, Email, SDT, NgayKetThuc ,hopdong.TrangThai 
       FROM hopdong,sinhvien
-      WHERE hopdong.MaSV = sinhvien.id and TrangThai NOT IN ('Hết hạn', 'Sắp hết hạn')
+      WHERE hopdong.MaSV = sinhvien.id and hopdong.TrangThai NOT IN ('Hết hạn', 'Sắp hết hạn')
         AND NgayKetThuc BETWEEN ? AND ?
     `, [today.toISOString().split('T')[0], next7Days.toISOString().split('T')[0]]);
 

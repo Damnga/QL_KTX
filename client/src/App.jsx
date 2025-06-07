@@ -63,8 +63,8 @@ function App() {
         </Route>
       </Routes>
       <ToastContainer position="top-right" autoClose={1000} />
-      <ChatWidget/>
-      
+      {/* <ChatWidget/> */}
+      <Chatbot/>
     </>
   )
 }

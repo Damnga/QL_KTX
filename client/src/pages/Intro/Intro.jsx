@@ -6,7 +6,9 @@ import Header from "../../component/Header/Header";
 import Campus from "../../component/Campus/Campus";
 import Footer from "../../component/Footer/Footer";
 import Banner from "../../component/Banner/Banner";
+import { usePhongContext } from '../../context/PhongContext';
 const Intro = () => {
+  const {t} = usePhongContext();
   const containerRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
     useEffect(() => {
@@ -97,7 +99,7 @@ const Intro = () => {
               <div className="stat-number">
                 {isVisible ? <CountUp end={34000} duration={5} separator="," /> : 0}+
               </div>
-              <div className="stat-label">Sinh viên nội trú</div>
+              <div className="stat-label">{t('internal student')}</div>
             </div>
           </div>
           <div className="stat gradient-bg">
@@ -106,7 +108,7 @@ const Intro = () => {
               <div className="stat-number">
                 {isVisible ? <CountUp end={1228} duration={5} separator="," /> : 0}
               </div>
-              <div className="stat-label">Lượt sinh viên miễn, giảm lệ phí phòng ở</div>
+              <div className="stat-label">{t('Students exempt and reduce room fees')}</div>
             </div>
           </div>
           <div className="stat blue-bg">
@@ -115,7 +117,7 @@ const Intro = () => {
               <div className="stat-number">
                 {isVisible ? <CountUp end={6700} duration={5} separator="," /> : 0}+
               </div>
-              <div className="stat-label">Phòng ở</div>
+              <div className="stat-label">{t('room')}</div>
             </div>
           </div>
         </div>
@@ -123,7 +125,7 @@ const Intro = () => {
       <div className='intro_container_middle_event'>
       <div className="event-section">
       <h2 className="event-title">
-        Sự kiện <span>sắp diễn ra</span>
+        {t('event')}<span> {t('upcoming')}</span>
       </h2>
       <div className="event-content">
         <div className="event-left">
@@ -147,7 +149,7 @@ const Intro = () => {
     </div>
       </div>
       <div className='intro_container_bottom'>
-        <p>Đối tác - <span>Khách Hàng</span></p>
+        <p>{t('partners')} - <span>{t('customer')}</span></p>
         <div className="slider-loop-container">
           <div className="slider-loop-track" ref={trackRef} style={{transform: `translateX(-${(100 / VISIBLE_COUNT) * index}%)`,}} >
             {extendedImages.map((img, i) => (

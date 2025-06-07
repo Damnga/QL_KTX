@@ -1,15 +1,19 @@
 import React from 'react'
 import "./Campus.css";
+import { usePhongContext } from '../../context/PhongContext';
+
 const Campus = () => {
+    const {t} = usePhongContext();
+
   return (
     <div className="campus">
       <div className="campus_container">
         <div className="campus_left">
-          <h2>Campus</h2>
+          <h2>{t('campus')}</h2>
           <div className="address">
             <span className="icon">📍</span>
             <div>
-              <strong>NỘI KHU KÝ TÚC XÁ:</strong><p>Khu đô thị Pháp Vân-Tứ Hiệp, phường Hoàng Liệt, quận Hoàng Mai, thành phố Hà Nội.</p>
+              <strong>{t('Internal dormitory')}:</strong><p>Khu đô thị Pháp Vân-Tứ Hiệp, phường Hoàng Liệt, quận Hoàng Mai, thành phố Hà Nội.</p>
             </div>
           </div>
         </div>

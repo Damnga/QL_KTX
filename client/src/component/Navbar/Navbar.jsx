@@ -2,11 +2,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import "./Navbar.css";
 import {Link} from 'react-router-dom';
+import { usePhongContext } from '../../context/PhongContext';
+
 const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [hideNavbar, setHideNavbar] = useState(false);
   const observerRef = useRef(null);
-
+  const {t} = usePhongContext();
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 100);
@@ -44,48 +46,48 @@ const Navbar = () => {
           <Link to="/"><img className='image' src="/images/thuonghieuanh.png" alt="logo" /></Link>
         </div>
         <ul className="navbar_container_right">
-          <li><Link to ="/"><a href="#">Trang chủ</a></Link></li>
+          <li><Link to ="/"><a href="#">{t('dashboard')}</a></Link></li>
           <li className="dropdown">
-            <a href="#">Giới Thiệu ▾</a>
+            <a href="#">{t('introduce')} ▾</a>
             <ul className="dropdown_menu">
               <li className="submenu">
-                <a href="#">Giới thiệu chung ▸</a>
+                <a href="#">{t('general introduce')} ▸</a>
                 <ul className="dropdown_submenu">
-                  <li><a href="#">Thông tin chung về KTX</a></li>
-                  <li><a href="#">Tầm nhìn - Sứ mạng</a></li>
-                  <li><a href="#">Bộ nhận diện thương hiệu</a></li>
-                  <li><a href="#">Bài ca truyền thống</a></li>
+                  <li><a href="#">{t('general information about dormitory')}</a></li>
+                  <li><a href="#">{t('vision - mission')}</a></li>
+                  <li><a href="#">{t('brand identity kit')}</a></li>
+                  <li><a href="#">{t('traditional song')}</a></li>
                 </ul>
               </li>
               <li className="submenu">
-                <a href="#">Cơ cấu tổ chức ▸</a>
+                <a href="#">{t('nest structure')} ▸</a>
                 <ul className="dropdown_submenu">
-                  <li><a href="#">Hội Đồng Quản Lý</a></li>
-                  <li><a href="#">Ban Giám Đốc</a></li>
-                  <li><a href="#">Các phòng trực thuộc</a></li>
+                  <li><a href="#">{t('management council')}</a></li>
+                  <li><a href="#">{t('board of directors')}</a></li>
+                  <li><a href="#">{t('rooms on duty')}</a></li>
                 </ul>
               </li>
             </ul>
           </li>
           <li className="dropdown">
-            <a href="#">Tin Tức và Sự Kiện ▾</a>
+            <a href="#">{t('news and events')} ▾</a>
             <ul className="dropdown_menu">
-              <li className="submenu"><a href="#">Tin quan trọng</a></li>
-              <li className="submenu"><a href="#">Tin tức - sự kiện</a></li>
-              <li className="submenu"><a href="#">Hoạt động đoàn thể</a></li>
+              <li className="submenu"><a href="#">{t('important news')}</a></li>
+              <li className="submenu"><a href="#">{t('news - events')}</a></li>
+              <li className="submenu"><a href="#">{t('group activities')}</a></li>
             </ul>
           </li>
           <li className="dropdown">
-            <a href="#">Sinh viên nội trú ▾</a>
+            <a href="#">{t('internal student')}▾</a>
             <ul className="dropdown_menu">
-              <li className="submenu"><a href="#">Biểu mẫu</a></li>
-              <li className="submenu"><a href="#">Thông tin hướng dẫn</a></li>
-              <li className="submenu"><a href="#">Câu hỏi thường gặp</a></li>
-              <li className="submenu"><a href="#">Đăng kí nội trú</a></li>
-              <li className="submenu"><a href="#">Quy chế / Quy định</a></li>
+              <li className="submenu"><a href="#">{t('forms')}</a></li>
+              <li className="submenu"><a href="#">{t('instruction information')}</a></li>
+              <li className="submenu"><a href="#">{t('frequently asked questions')}</a></li>
+              <li className="submenu"><a href="#">{t('inpatient registration')}</a></li>
+              <li className="submenu"><a href="#">{t('regulations')}</a></li>
             </ul>
           </li>
-          <li><a href="#">Liên hệ</a></li>
+          <li><a href="#">{t('contact us')}</a></li>
           <li><Link to="/login"><a href="">&#128101;</a></Link></li>
         </ul>
       </div>

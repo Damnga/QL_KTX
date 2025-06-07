@@ -32,6 +32,36 @@
 
   "contact us": "Contact Us",
   
+  "Students exempt and reduce room fees": "Students exempt and reduce room fees",
+  "room": "Room",
+
+  "event": "Event",
+  "upcoming": "Upcoming",
+  
+  "partners": "Partners",
+  "customer": "Customer",
+
+  "campus":" Campus",
+  "Internal dormitory":"INTERNAL DORMITORY",
+
+  "contact":"CONTACT",
+  "address":"Address",
+  "INTRODUCE":"INTRODUCE",
+  "About the dormitory management center":"About the Dormitory Management Center",
+  "Union organization":"Union Organization",
+  "union":"Union",
+  "branch":"Branch",
+  "Unit of affiliated": "Unit of Affiliated",
+  "Building Management A1":"Building Management A1",
+  "Building Management A2":"Building Management A2",
+  "Building Management A3":"Building Management A3",
+  "Building Management A4":"Building Management A4",
+  "Building Management A5":"Building Management A5",
+  "Building Management A6":"Building Management A6",
+  "Copyright © 2025 of the dormitory management center": "Copyright © 2025 of the Dormitory Management Center",
+  "Design and construction by": "Design and Construction by",
+  "Follow us on": "Follow Us On",
+
   "search": [
     "Search products...",
     "Search by code...",
