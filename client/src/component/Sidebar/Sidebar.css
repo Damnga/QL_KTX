@@ -1,0 +1,91 @@
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  position: fixed;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px; 
+  padding-left: 30px;
+  background: linear-gradient(to bottom, #4b79a1, #002f6c);
+}
+
+.sidebar hr {
+  color: white;
+  width: 230px;
+  margin: 15px 0;
+}
+
+.sidebar-top img {
+  width: 100px; 
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.sidebar-bottom {
+  width: 100%;
+}
+
+.sidebar-bottom ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-bottom li {
+  padding: 18px 0;
+  padding-left: 40px; 
+  color: white;
+  font-size: 16px;
+  font-weight: bold; 
+  text-align: left;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.sidebar-bottom li:hover {
+  background-color: hsl(216, 17%, 72%);
+  color: #002f6c;
+  border-top-left-radius: 50px;  
+  border-bottom-left-radius: 50px; 
+}
+
+.sidebar-bottom li.active {
+  background: white;
+  color: #002f6c;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  position: relative;
+}
+
+.submenu {
+  padding-left: 60px;
+  list-style: none;
+  margin-top: -10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.submenu li {
+  font-size: 14px;
+  padding: 10px 10px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+  text-align: center;
+}
+
+.submenu li:hover {
+  background-color: hsl(216, 17%, 85%);
+  color: #002f6c;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.submenu li.active {
+  background-color: white;
+  color: #002f6c;
+  font-weight: bold;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+}

@@ -1,0 +1,16 @@
+.support-admin{
+    background: linear-gradient(to bottom, #4b79a1, #002f6c);
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.support-admin-component{
+    background-color: white;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 290px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-radius: 50px;
+    padding-top: 20px;
+}

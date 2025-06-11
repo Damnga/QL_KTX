@@ -1,0 +1,68 @@
+{
+  "language": "Ngôn ngữ",
+  "hotline": "Tổng đài",
+  "support": "Hỗ trợ đăng ký phòng ở",
+  "jobs": "Việc làm",
+  "tour": "Tham quan KTX trực tuyến",
+
+  "dashboard": "Trang Chủ",
+
+  "introduce": "Giới thiệu",
+  "general introduce": "Giới thiệu chung",
+  "nest structure": "Cơ cấu tổ chức",
+  "general information about dormitory": "Thông tin chung về KTX",
+  "vision - mission": "Tầm nhìn - Sứ mệnh",
+  "brand identity kit": "Bộ nhận diện thương hiệu",
+  "traditional song": "Bài hát truyền thống",
+  "management council": "Hội đồng quản lý",
+  "board of directors": "Ban giám đốc",
+  "rooms on duty": "Các phòng trực thuộc",
+
+  "news and events": "Tin tức và Sự kiện",
+  "important news": "Tin tức quan trọng",
+  "news - events": "Tin tức - Sự kiện",
+  "group activities": "Hoạt động nhóm",
+
+  "internal student": "Sinh viên nội trú",
+  "forms": "Biểu mẫu",
+  "instruction information": "Thông tin hướng dẫn",
+  "frequently asked questions": "Câu hỏi thường gặp",
+  "inpatient registration": "Đăng ký nội trú",
+  "regulations": "Quy định",
+
+  "contact us": "Liên hệ",
+  "Students exempt and reduce room fees": "Sinh viên được miễn giảm tiền phòng",
+  "room": "Phòng",
+
+  "event": "Sự kiện",
+  "upcoming": "sắp diễn ra",
+
+  "partners": "Đối tác",
+  "customer": "Khách hàng",
+
+  "campus": "Khuôn viên",
+  "Internal dormitory":"NỘI KHU KÝ TÚC XÁ",
+
+  "contact":"LIÊN HỆ",
+  "address":"Địa chỉ",
+  "INTRODUCE":"GIỚI THIỆU",
+  "About the dormitory management center":"Về trung tâm quản lý KTX",
+  "Union organization":"Tổ chức đoàn thể",
+  "union":"Công đoàn",
+  "branch":"Chi đoàn",
+  "Unit of affiliated": "Đơn vị trực thuộc",
+  "Building Management A1":"Quản lý tòa nhà A1",
+  "Building Management A2":"Quản lý tòa nhà A2",
+  "Building Management A3":"Quản lý tòa nhà A3",
+  "Building Management A4":"Quản lý tòa nhà A4",
+  "Building Management A5":"Quản lý tòa nhà A5",
+  "Building Management A6":"Quản lý tòa nhà A6",
+  "Copyright © 2025 of the dormitory management center": "Bản quyền © 2025 của trung tâm quản lý KTX",
+  "Design and construction by": "Thiết kế và thi công bởi",
+  "Follow us on": "Theo dõi chúng tôi trên",
+  "search": [
+    "Tìm kiếm sản phẩm...",
+    "Tìm kiếm theo mã...",
+    "Tìm kiếm theo tên..."
+  ]
+}

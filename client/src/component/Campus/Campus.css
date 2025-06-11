@@ -1,0 +1,41 @@
+.campus{
+    height:400px;
+    padding: 40px;
+    background: linear-gradient(to bottom, #002f6c, #4b79a1);
+    color: white;
+    flex-wrap: wrap;
+}
+.campus_container {
+    width: 1240px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+  }
+  
+  .campus_left {
+    flex: 1;
+    min-width: 400px;
+    margin-right: 20px;
+  }
+  
+  .campus_left h2 {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .address {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .icon {
+    font-size: 20px;
+    margin-right: 10px;
+    color: red;
+  }
+  
+  .campus_right {
+    flex: 1;
+    width: 400px;
+  }
+  

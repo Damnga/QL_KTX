@@ -1,0 +1,71 @@
+{
+  "language": "Language",
+  "hotline": "Hotline",
+  "support": "Room registration support",
+  "jobs": "Jobs",
+  "tour": "Virtual dorm tour",
+
+  "dashboard": "Dashboard",
+
+  "introduce": "Introduce",
+  "general introduce": "General Introduce",
+  "nest structure": "Nest Structure",
+  "general information about dormitory": "General information about dormitory",
+  "vision - mission": "Vision - Mission",
+  "brand identity kit": "Brand identity kit",
+  "traditional song": "Traditional song",
+  "management council": "Management Council",
+  "board of directors": "Board of Directors",
+  "rooms on duty": "Rooms on duty",
+
+  "news and events": "News and Events",
+  "important news": "Important News",
+  "news - events": "News - Events",
+  "group activities": "Group Activities",
+
+  "internal student": "Internal Student",
+  "forms": "Forms",
+  "instruction information": "Instruction Information",
+  "frequently asked questions": "Frequently Asked Questions",
+  "inpatient registration": "Inpatient Registration",
+  "regulations": "Regulations",
+
+  "contact us": "Contact Us",
+  
+  "Students exempt and reduce room fees": "Students exempt and reduce room fees",
+  "room": "Room",
+
+  "event": "Event",
+  "upcoming": "Upcoming",
+  
+  "partners": "Partners",
+  "customer": "Customer",
+
+  "campus":" Campus",
+  "Internal dormitory":"INTERNAL DORMITORY",
+
+  "contact":"CONTACT",
+  "address":"Address",
+  "INTRODUCE":"INTRODUCE",
+  "About the dormitory management center":"About the Dormitory Management Center",
+  "Union organization":"Union Organization",
+  "union":"Union",
+  "branch":"Branch",
+  "Unit of affiliated": "Unit of Affiliated",
+  "Building Management A1":"Building Management A1",
+  "Building Management A2":"Building Management A2",
+  "Building Management A3":"Building Management A3",
+  "Building Management A4":"Building Management A4",
+  "Building Management A5":"Building Management A5",
+  "Building Management A6":"Building Management A6",
+  "Copyright © 2025 of the dormitory management center": "Copyright © 2025 of the Dormitory Management Center",
+  "Design and construction by": "Design and Construction by",
+  "Follow us on": "Follow Us On",
+
+  "search": [
+    "Search products...",
+    "Search by code...",
+    "Search by name..."
+  ]
+
+}

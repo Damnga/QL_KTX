@@ -1,0 +1,152 @@
+.event {
+    margin-top: 70px;
+    background-color: #f0f2f5;
+    padding: 20px 0;
+  }
+  
+.event-container {
+    width: 1240px;
+    margin: auto;
+    padding: 0 20px;
+    overflow-y: auto;
+    height:800px;
+    
+}
+.event-container::-webkit-scrollbar {
+    display: none;   
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px;
+  justify-content: center;
+}
+.card {
+  width: 300px;
+  border-radius: 12px;
+  background-color: #fff;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px gray;
+}
+
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.desc {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+.time {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+.btn-sukien {
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+  background-color:#1877f2;
+
+}
+
+.btn-sukien:hover {
+    color:black;
+    background-color: #ddd;
+
+}
+
+  .trangthaisukien {
+  text-align: center;
+  font-weight: 600;
+  user-select: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.bg-green {
+  background-color: #d4edda; 
+  color: #155724; 
+}
+
+.bg-red {
+  background-color: #f8d7da; 
+  color: #721c24;
+}
+
+.bg-yellow {
+  background-color: #fff3cd; 
+  color: #856404;
+}
+
+.bg-orange {
+  background-color: #ffe5b4;
+  color: #a0522d; 
+}
+
+.bg-default {
+  background-color: #e2e3e5; 
+  color: #6c757d; 
+}
+
+.btn-sukien.disabled {
+  background-color: #ccc;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+.btn-sukien {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-sukien:hover {
+  opacity: 0.9;
+}
+
+.btn-huy {
+  background-color: #dc3545 !important; /* màu đỏ */
+}
+.btn-disabled {
+  background-color: #ccc !important;
+  cursor: not-allowed !important;
+  color: #666;
+}
