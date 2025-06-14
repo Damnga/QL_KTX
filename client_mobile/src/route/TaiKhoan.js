@@ -41,7 +41,7 @@ export const login = async (Email, Password) => {
 export const logout = async () => {
   try {
     const response = await axios.post(`${API_URL}/logout`);
-    localStorage.removeItem('token');
+    AsyncStorage.removeItem('token');
     return response.data;
   } catch (error) {
     throw error.response?.data || { message: 'Lỗi đăng xuất' };

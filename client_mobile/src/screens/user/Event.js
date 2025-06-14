@@ -17,8 +17,6 @@ const EventScreen = () => {
     const init = async () => {
       try {
         const token = await AsyncStorage.getItem('token');
-
-        // ⚠️ Kiểm tra token có hợp lệ không trước khi decode
         if (token && typeof token === 'string') {
           const decoded = jwtDecode(token);
           if (decoded?.id) {

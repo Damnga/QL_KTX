@@ -99,7 +99,7 @@ const LakeProfile = () => {
     MaPhong: maphongbytksinhvien.MaPhong,
     NoiDung: noiDungSuaChua,
     TrangThai: "Chờ xử lý",
-    NgayDangKy: new Date().toISOString().slice(0, 10),
+    ThoiGian: new Date().toISOString().slice(0, 10),
     };
     try {
       await createBaoTri(newBT);
@@ -145,7 +145,6 @@ const LakeProfile = () => {
   };
   const handleEditSubmit = async () => {
   if (!editData) return;
-
   const updated = {
     ...editData,
     NoiDung: newContent,
@@ -161,7 +160,6 @@ const LakeProfile = () => {
     toast.error("Lỗi khi sửa góp ý:", error);
   }
   };
-
   const [showDangKyTham, setShowDangKyTham] = useState(false);
   const [noiDungDangKyTham, setNoiDungDangKyTham] = useState({
     TgianBatDau: "",
@@ -195,7 +193,6 @@ const LakeProfile = () => {
   }
   };
   if (loading) return <p>Đang tải...</p>;
-
   return (
     <div className="profile">
       <div className="profile-container">
@@ -403,7 +400,7 @@ const LakeProfile = () => {
                     </div>
                       </div>
                     </div>
-                    )}
+                  )}
                 </tr>
               ))}
             </table>
@@ -471,11 +468,9 @@ const LakeProfile = () => {
             {showDangKyTham && (
             <div className="modal">
               <div className="modal-content-room ">
-                <h3>Đăng ký Góp Ý</h3>
+                <h3>Đăng ký vào thăm</h3>
                 <label>Người thân:</label>
-                <select value={noiDungDangKyTham.MaNT}
-                  onChange={(e) => setNoiDungDangKyTham({...noiDungDangKyTham,MaNT:e.target.value})}
-                >
+                <select value={noiDungDangKyTham.MaNT}  onChange={(e) => setNoiDungDangKyTham({...noiDungDangKyTham,MaNT:e.target.value})} >
                   <option value="">-- Chọn người thân --</option>
                     {nguoithan.map(loai => (
                   <option key={loai.id} value={loai.id}>

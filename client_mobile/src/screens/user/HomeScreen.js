@@ -11,10 +11,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = () => {
   const toast = useToast();
-
   const [token, setToken] = useState(null);
   const [userData, setUserData] = useState(null);
-
   const [BaiVietListData, setBaiVietListData] = useState([]);
   const [tuongTacList, setTuongTacList] = useState([]);
   const [binhLuanList, setBinhLuanList] = useState([]);

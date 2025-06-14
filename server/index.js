@@ -42,7 +42,7 @@ const app = express();
 updateRoomStatusJob();
 updateContractStatus();
 updateEventStatusJob();
-cron.schedule('* * * * *', async () => {
+cron.schedule('0 0 * * *', async () => {
   console.log('[⏰] Backup mỗi ngày lúc 00:00');
   try {
     await backupImages();
