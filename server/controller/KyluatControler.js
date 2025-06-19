@@ -4,7 +4,7 @@ export const create = async (req, res, next) => {
   try {
     const {MaSV, NgayViPham, NoiDungViPham, HinhThucXuLy, GhiChu} = req.body;
     await createKyLuat({MaSV, NgayViPham, NoiDungViPham, HinhThucXuLy, GhiChu});
-    res.status(201).json({ message: 'Tạo ky layt thành công' });
+    res.status(201).json({ message: 'Tạo ky luat thành công' });
   } catch (err) {
     next(err);
   }

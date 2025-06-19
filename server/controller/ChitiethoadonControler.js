@@ -1,5 +1,5 @@
 
-import {getAllChiTietHoaDon, getChiTietHoaDonById, createChiTietHoaDon, updateChiTietHoaDon, deleteChiTietHoaDon} from "../model/ChitiethoadonModel.js"
+import {getAllChiTietHoaDon,getAllChiTietHoaDonData, getChiTietHoaDonById, createChiTietHoaDon, updateChiTietHoaDon, deleteChiTietHoaDon} from "../model/ChitiethoadonModel.js"
 
 export const create = async (req, res, next) => {
   try {
@@ -13,7 +13,17 @@ export const create = async (req, res, next) => {
 
 export const getChiTietHoaDon = async (req, res, next) => {
   try {
+    const MaHD = req.params.MaHD
     const rows = await getAllChiTietHoaDon();
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
+};
+export const getChiTietHoaDonData = async (req, res, next) => {
+  try {
+    const MaHD = req.params.MaHD
+    const rows = await getAllChiTietHoaDonData(MaHD);
     res.json(rows);
   } catch (err) {
     next(err);

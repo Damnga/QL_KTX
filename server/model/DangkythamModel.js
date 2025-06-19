@@ -12,7 +12,7 @@ export const getAllDangKyTham = async () => {
 
 export const getDangKyThamById = async (id) => {
   try {
-    const [rows] = await db.query('SELECT * FROM dawngkytham WHERE id = ?', [id]);
+    const [rows] = await db.query('SELECT * FROM dangkytham WHERE id = ?', [id]);
     return rows[0];
   } catch (error) {
     console.error('Lỗi khi lấy danh sách dangkytham:', error);
@@ -21,7 +21,7 @@ export const getDangKyThamById = async (id) => {
 };
 export const getDangKyThamByIdSinhVien = async (id) => {
   try {
-    const [rows] = await db.query('SELECT sinhvien.id,nguoithan.HoTen,nguoithan.QuanHe,TgianBatDau,TgianKetThuc,dangkytham.TrangThai FROM sinhvien,nguoithan,dangkytham WHERE sinhvien.id = nguoithan.MaSV AND nguoithan.id=dangkytham.MaNT and sinhvien.id = ?', [id]);
+    const [rows] = await db.query('SELECT dangkytham.id as IDTham, sinhvien.id,nguoithan.HoTen,nguoithan.QuanHe,TgianBatDau,TgianKetThuc,dangkytham.TrangThai FROM sinhvien,nguoithan,dangkytham WHERE sinhvien.id = nguoithan.MaSV AND nguoithan.id=dangkytham.MaNT and sinhvien.id = ?', [id]);
     return rows;
   } catch (error) {
     console.error('Lỗi khi lấy danh sách dangkytham:', error);

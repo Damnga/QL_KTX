@@ -12,7 +12,7 @@ export const getAllHoSo = async () => {
 
 export const getHoSoById = async (id) => {
   try {
-    const [rows] = await db.query('SELECT * FROM hoso WHERE id = ?', [id]);
+    const [rows] = await db.query('SELECT * FROM hoso WHERE MaHD = ?', [id]);
     return rows[0];
   } catch (error) {
     console.error('Lỗi khi lấy danh sách ho so:', error);
@@ -53,7 +53,7 @@ export const updateHoSo = async (MaHD, newHoSo) => {
 
 export const deleteHoSo = async (id) => {
   try {
-    await db.query('DELETE FROM hoso WHERE id = ?', [id]);
+    await db.query('DELETE FROM hoso WHERE MaHD = ?', [id]);
   } catch (error) {
     console.error('Error in deleteHoSo:', error);
     throw error;

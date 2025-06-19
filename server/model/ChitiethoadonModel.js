@@ -9,7 +9,15 @@ export const getAllChiTietHoaDon = async () => {
     throw error;
   }
 };
-
+export const getAllChiTietHoaDonData = async (MaHD) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM chitiethoadon where MaHD = ?',[MaHD]);
+    return rows;
+  } catch (error) {
+    console.error('Lỗi khi lấy danh sách chi tiet hoa don:', error);
+    throw error;
+  }
+};
 export const getChiTietHoaDonById = async (id) => {
   try {
     const [rows] = await db.query('SELECT * FROM chitiethoadon WHERE id = ?', [id]);

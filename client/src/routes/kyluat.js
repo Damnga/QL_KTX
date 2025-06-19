@@ -3,24 +3,21 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/ky_luat';
 
-export const createNguoiThan = async (formData) => {
+export const createKyLuat = async (data) => {
   try {
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-    const response = await axios.post(`${API_URL}/create`, formDataToSend, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response = await axios.post(`${API_URL}/create`, data, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+    );
     return response.data;
   } catch (error) {
-    throw error.response?.data;
+    throw error.response?.data || error;
   }
 };
 
-export const getAllNguoiThan = async (token) => {
+export const getAllKyLuat = async (token) => {
   try {
     const response = await axios.get(`${API_URL}/select`, {
       headers: {
@@ -33,7 +30,7 @@ export const getAllNguoiThan = async (token) => {
   }
 };
 
-export const getAllNguoiThanData = async (token) => {
+export const getAllKyLuatData = async (token) => {
   try {
     const response = await axios.get(`${API_URL}/select_data`, {
       headers: {
@@ -46,7 +43,7 @@ export const getAllNguoiThanData = async (token) => {
   }
 };
 
-export const getByIdNguoiThan = async (id, token) => {
+export const getByIdKyLuat = async (id, token) => {
   try {
     const response = await axios.get(`${API_URL}/${id}`, {
       headers: {
@@ -71,27 +68,21 @@ export const getByIdKyLuatSinhVien = async (id, token) => {
   }
 };
 
-export const editNguoiThan = async (id, formData, token) => {
+export const editKyLuat = async (id, data) => {
   try {
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-
-    const response = await axios.put(`${API_URL}/${id}`, formDataToSend, {
+    const response = await axios.put(`${API_URL}/${id}`, data, {
       headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
       },
     });
 
     return response.data;
   } catch (error) {
-    throw error.response?.data;
+    throw error.response?.data ;
   }
 };
 
-export const removeNguoiThan = async (id, token) => {
+export const removeKyLuat = async (id, token) => {
   try {
     const response = await axios.delete(`${API_URL}/${id}`, {
       headers: {

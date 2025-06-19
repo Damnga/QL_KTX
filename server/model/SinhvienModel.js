@@ -49,7 +49,7 @@ export const getSinhVienByCCCD = async (CCCD) => {
 
 export const getSinhVienByIdUser = async (id) => {
   try {
-    const [rows] = await db.query('SELECT sinhvien.anh,NgayBatDau,sinhvien.Email,Lop, taikhoan.id,HoTen,QueQuan,SDT,NgaySinh,GioiTinh,Truong,NienKhoa,hopdong.TrangThai,TenPhong,TenTN FROM taikhoan,sinhvien,hopdong,phong,toanha WHERE phong.MaTN = toanha.MaTN AND taikhoan.MaSV = sinhvien.id and sinhvien.id = hopdong.MaSV and hopdong.MaPhong = phong.MaPhong and taikhoan.id = ?', [id]);
+    const [rows] = await db.query('SELECT sinhvien.id as MaSV, sinhvien.anh,NgayBatDau,sinhvien.Email,Lop, taikhoan.id,HoTen,QueQuan,SDT,NgaySinh,GioiTinh,Truong,NienKhoa,hopdong.TrangThai,TenPhong,TenTN FROM taikhoan,sinhvien,hopdong,phong,toanha WHERE phong.MaTN = toanha.MaTN AND taikhoan.MaSV = sinhvien.id and sinhvien.id = hopdong.MaSV and hopdong.MaPhong = phong.MaPhong and taikhoan.id = ?', [id]);
     return rows[0];
   } catch (error) {
     console.error('Lỗi khi lấy danh sách sinh vien:', error);

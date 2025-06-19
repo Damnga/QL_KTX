@@ -4,16 +4,17 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/chi_tiet_hoa_don';
 
 
-export const createChiTietHoaDon = async (formData) => {
+export const createChiTietHoaDon = async (data) => {
   try {
-    const response = await axios.post(`${API_URL}/create`, formData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.data;
+    const response = await axios.post(`${API_URL}/create`, data);
+    return { success: true, data: response.data };
   } catch (error) {
-    throw error.response?.data;
+    const errMessage =
+      error.response?.data?.message ||
+      error.message ||
+      'Lỗi tạo chi tiết hóa đơn';
+
+    return { success: false, error: errMessage };
   }
 };
 
@@ -30,9 +31,9 @@ export const getAllChiTietHoaDon = async (token) => {
   }
 };
 
-export const getAllChiTietHoaDonData = async (token) => {
+export const getAllChiTietHoaDonData = async (MaHD,token) => {
   try {
-    const response = await axios.get(`${API_URL}/select_data`, {
+    const response = await axios.get(`${API_URL}/select/${MaHD}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

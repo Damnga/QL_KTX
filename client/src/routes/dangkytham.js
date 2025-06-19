@@ -67,23 +67,16 @@ export const getByIdDangKyThamSinhVien = async (id, token) => {
   }
 };
 
-export const editDangKyTham = async (id, formData, token) => {
+export const editDangKyTham = async (id, data) => {
   try {
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-
-    const response = await axios.put(`${API_URL}/${id}`, formDataToSend, {
+    const response = await axios.put(`${API_URL}/${id}`, data, {
       headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "application/json",
       },
     });
-
     return response.data;
   } catch (error) {
-    throw error.response?.data;
+    throw error.response?.data || error;
   }
 };
 

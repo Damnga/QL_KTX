@@ -21,7 +21,7 @@ export const getKyLuatById = async (id) => {
 };
 export const getKyLuatByIdSinhVien = async (id) => {
   try {
-    const [rows] = await db.query('SELECT sinhvien.id,NgayViPham,NoiDungViPham,HinhThucXuLy FROM kyluat,sinhvien WHERE sinhvien.id = kyluat.MaSV AND sinhvien.id = ?', [id]);
+    const [rows] = await db.query('SELECT kyluat.id as ID, sinhvien.id,NgayViPham,NoiDungViPham,HinhThucXuLy FROM kyluat,sinhvien WHERE sinhvien.id = kyluat.MaSV AND sinhvien.id = ?', [id]);
     return rows;
   } catch (error) {
     console.error('Lỗi khi lấy danh sách kyluat:', error);

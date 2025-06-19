@@ -1,17 +1,17 @@
 import { useState,useEffect } from 'react';
 import "./UserManagment.css";
 import Header_admin from "../../../component/Header_admin/Header_admin";
-import {createSinhVien2, getAllSinhVien,getAllSinhVienData, editSinhVien,removeSinhVien} from "../../../routes/sinhvien";
+import {getAllSinhVien,getAllSinhVienData, editSinhVien} from "../../../routes/sinhvien";
 import * as XLSX from 'xlsx';
 import { toast } from 'react-toastify';
 import {getByIdSinhVienUser,getByIdTaiKhoanSinhVien} from "../../../routes/sinhvien";
 import {getByIdTenPhongTenTN,getByIdTenPhong} from "../../../routes/phong";
-import {getAllBaoTriPhong} from "../../../routes/baotri";
-import {getByIdTaiKhoan} from "../../../routes/hopdong";
+import {getByIdTaiKhoan,editHopDong} from "../../../routes/hopdong";
+import {editHoSo} from "../../../routes/hoso";
 import {getAllGopYSinhVien} from "../../../routes/gopy";
-import {getByIdNguoiThanSinhVien} from "../../../routes/nguoithan";
-import {getByIdDangKyThamSinhVien} from "../../../routes/dangkytham";
-import {getByIdKyLuatSinhVien} from "../../../routes/kyluat";
+import {getByIdNguoiThanSinhVien,createNguoiThan,editNguoiThan,removeNguoiThan} from "../../../routes/nguoithan";
+import {getByIdDangKyThamSinhVien,editDangKyTham} from "../../../routes/dangkytham";
+import {getByIdKyLuatSinhVien,createKyLuat,editKyLuat,removeKyLuat} from "../../../routes/kyluat";
 import {getByIdLichSuRaVaoSinhVien} from "../../../routes/lichsuravao";
 const UserManagment = () => {
   const token = localStorage.getItem('token');
@@ -124,7 +124,6 @@ const UserManagment = () => {
     );
   const [sinhvienuser,setSinhvienuser]=useState({});
   const [tenphongtenTNuser,settenphongtenTNuser]=useState([]);
-  const [baotriphong,setbaotriphong]=useState([]);
   const [hoso,sethoso]=useState({});
   const [gopy,setgopy]=useState([]);
   const [openImage, setOpenImage] = useState(null);
@@ -133,17 +132,163 @@ const UserManagment = () => {
   const [kyluat,setkyluat]=useState([]);
   const [lichsuravao,setlichsuravao]=useState([]);
   const [maphongbytksinhvien,setmaphongbytksinhvien]=useState({});
+  const [showEditDialog, setShowEditDialog] = useState(false);
+  const [editData, setEditData] = useState({
+    DonXin: hoso.DonXin || "",
+    GiayXacNhanSinhVien: hoso.GiayXacNhanSinhVien || "",
+    CCCDPhoTo: hoso.CCCDPhoTo || "",
+    HopDong: hoso.HopDong || "",
+    MaHD: hoso.MaHD || "",
+  });
+  const handleOpenEditDialog = () => {
+    setEditData({
+    DonXin: hoso.DonXin || "",
+    GiayXacNhanSinhVien: hoso.GiayXacNhanSinhVien || "",
+    CCCDPhoTo: hoso.CCCDPhoTo || "",
+    HopDong: hoso.HopDong || "",
+    MaHD: hoso.MaHD || "", 
+  });
+  setShowEditDialog(true);
+  };
+  const handleSaveEdit = async () => {
+  try {
+    await editHoSo(hoso.MaHD, editData); 
+    toast.success("Cập nhật hồ sơ thành công!");
+    setShowEditDialog(false);
+  } catch (err) {
+    console.error("Lỗi cập nhật hồ sơ:", err);
+    toast.error("Lỗi khi cập nhật hồ sơ.");
+  }
+
+  };
   const handleOpenImage = (filePath) => {
     setOpenImage(filePath);
   };
   const handleCloseImage = () => {
     setOpenImage(null);
   };
+  const [showAddDialog, setShowAddDialog] = useState(false);
+  const [nguoiThanInput, setNguoiThanInput] = useState({
+  HoTen: "", SDT: "", DiaChi: "", QuanHe: ""
+  });
+  const handleAddNguoiThan = async () => {
+  try {
+    const data = {
+      ...nguoiThanInput,
+      MaSV: sinhvienuser?.MaSV
+    };
+    await createNguoiThan(data);
+    const nguoithansinhvien = await getByIdNguoiThanSinhVien(selectedSinhVien?.id);
+    setnguithan(nguoithansinhvien);
+    setNguoiThanInput({
+      HoTen: "",
+      SDT: "",
+      DiaChi: "",
+      QuanHe: "",
+    });
+    setShowAddDialog(false);
+    toast.success("Thêm người thân thành công!");
+  } catch (err) {
+    console.error(err);
+    toast.error("Thêm thất bại!");
+  }
+  };
+  const [editNguoiThanInput, setEditNguoiThanInput] = useState({});
+  const [showEditNguoiThanDialog, setShowEditNguoiThanDialog] = useState(false);
+  const handleEditNguoiThan = (sv) => {
+  setEditNguoiThanInput(sv);
+  setShowEditNguoiThanDialog(true);
+  };
+  const handleSaveEditNguoiThan = async () => {
+  try {
+    await editNguoiThan(editNguoiThanInput.id, editNguoiThanInput);
+    const nguoithansinhvien = await getByIdNguoiThanSinhVien(selectedSinhVien?.id);
+    setnguithan(nguoithansinhvien);
+    toast.success("Cập nhật người thân thành công!");
+    setShowEditNguoiThanDialog(false);
+  } catch (err) {
+    toast.error("Cập nhật thất bại!");
+  }
+  };
+  const handleDeleteNguoiThan = async (id) => {
+  if (!window.confirm("Xác nhận xóa người thân này?")) return;
+  try {
+    await removeNguoiThan(id);
+    const nguoithansinhvien = await getByIdNguoiThanSinhVien(selectedSinhVien?.id);
+    setnguithan(nguoithansinhvien);
+    toast.success("Xóa thành công!");
+  } catch (err) {
+    toast.error("Xóa thất bại!");
+  }
+  };
+  const [dangKyThamEdit, setDangKyThamEdit] = useState({});
+  const [showEditTham, setShowEditTham] = useState(false);
+  const handleEditDangKyTham = (item) => {
+  setDangKyThamEdit(item);     
+  setShowEditTham(true);  
+  };
+  const handleSaveEditDangKyTham = async () => {
+  try {
+    await editDangKyTham(dangKyThamEdit.IDTham, {
+      TrangThai: dangKyThamEdit.TrangThai,
+    });
+    toast.success("Cập nhật đăng ký thăm thành công!");
+    setShowEditTham(false);
+    const dangkythamnguoithan = await getByIdDangKyThamSinhVien(selectedSinhVien?.id);
+    setdangkytham(dangkythamnguoithan);
+  } catch (err) {
+    toast.error("Cập nhật thất bại!");
+    console.log(err);
+  }
+  };
+  const [kyLuatInput, setKyLuatInput] = useState({ NoiDungViPham: "", NgayViPham: "", HinhThucXuLy: "" });
+  const [kyLuatEdit, setKyLuatEdit] = useState({MaSV: "", NoiDungViPham: "", NgayViPham: "", HinhThucXuLy: "" });
+  const [showAddKyLuat, setShowAddKyLuat] = useState(false);
+  const [showEditKyLuat, setShowEditKyLuat] = useState(false);
+  const handleAddKyLuat = async () => {
+  try {
+    await createKyLuat({ ...kyLuatInput, MaSV: sinhvienuser?.MaSV });
+    const kyluatsinhvien = await getByIdKyLuatSinhVien(selectedSinhVien?.id);
+    setkyluat(kyluatsinhvien);
+    toast.success("Thêm kỷ luật thành công");
+    setKyLuatInput({NoiDungViPham: "", NgayViPham: "", HinhThucXuLy: "" });
+    setShowAddKyLuat(false);
+  } catch (error) {
+    toast.error(`Thêm kỷ luật thất bại: ${error?.message}`);
+  }
+  }
+  const handleEditKyLuat = (item) => {
+    setKyLuatEdit({
+      id: item.ID,
+      NoiDungViPham: item.NoiDungViPham,
+      NgayViPham: item.NgayViPham.slice(0, 10),
+      HinhThucXuLy: item.HinhThucXuLy,
+    });
+    setShowEditKyLuat(true);
+  };
+  const handleSaveEditKyLuat = async () => {
+  try {
+    await editKyLuat(kyLuatEdit.id, kyLuatEdit);
+    const kyluatsinhvien = await getByIdKyLuatSinhVien(selectedSinhVien?.id);
+    setkyluat(kyluatsinhvien);
+    setShowEditKyLuat(false);
+    toast.success("Sửa kỷ luật thành công");
+  } catch (error) {
+    toast.error(`Lỗi khi sửa kỷ luật: ${error?.message}`);
+    console.error(error);
+  }
+};
+  const handleDeleteKyLuat = async (id) => {
+    if (window.confirm("Bạn có chắc chắn muốn xóa?")) {
+      await removeKyLuat(id);
+      const kyluatsinhvien = await getByIdKyLuatSinhVien(selectedSinhVien?.id);
+      setkyluat(kyluatsinhvien);
+    }
+  };
   useEffect(() => {
   const fetchUser = async () => {
     try {
       const tksv = await getByIdTaiKhoanSinhVien(selectedSinhVien?.id);
-      console.log("dgsdgsd",tksv);
       const sinvienuser = await getByIdSinhVienUser(tksv.MaTK);
       const sinhvienValue = Array.isArray(sinvienuser)
         ? sinvienuser[0]
@@ -151,8 +296,6 @@ const UserManagment = () => {
       setSinhvienuser(sinhvienValue);
       const tenphongtenTN = await getByIdTenPhongTenTN(sinhvienValue.TenPhong,sinhvienValue.TenTN);
       settenphongtenTNuser(tenphongtenTN);
-      const baotri = await getAllBaoTriPhong(sinhvienValue.TenPhong,sinhvienValue.TenTN);
-      setbaotriphong(baotri);
       const hosotaikhoan = await getByIdTaiKhoan(tksv.MaTK);
       sethoso(hosotaikhoan);
       const gopysinhvien = await getAllGopYSinhVien(selectedSinhVien?.id);
@@ -169,17 +312,12 @@ const UserManagment = () => {
       setmaphongbytksinhvien(maphongsinhvien);
     } catch (err) {
       toast.error(err);
-      console.log(err);
     } finally {
       setLoading(false);
     }
   };
   fetchUser();
   }, [token,selectedSinhVien]);
-  const [showDangKySuaChua, setShowDangKySuaChua] = useState(false);
-  const [noiDungSuaChua, setNoiDungSuaChua] = useState("");
-  const handleOpenDangKySuaChua = () => setShowDangKySuaChua(true);
-  const handleCloseDangKySuaChua = () => setShowDangKySuaChua(false);
   if (loading) return <p>Đang tải...</p>;
   return (
     <div className='user'>
@@ -276,7 +414,7 @@ const UserManagment = () => {
       <div className="profile-user">
         <div className="profile-container-user">
           <div className="profile-sidebar-user">
-                <div className="profile-infor-user ">
+            <div className="profile-infor-user ">
                   <div className="profile-card">
           <img src={`http://localhost:3000/uploads/${sinhvienuser.anh}`} alt="Avatar" className="profile-avatar" />
           <p className={`trangthai ${ sinhvienuser.TrangThai === 'Đã Nhận Phòng' ? 'bg-green' :  sinhvienuser.TrangThai === 'Hết hạn' ? 'bg-red' : sinhvienuser.TrangThai === 'Sắp hết hạn' ? 'bg-yellow'  :  'bg-default'}`}>{sinhvienuser.TrangThai} </p>    
@@ -296,7 +434,7 @@ const UserManagment = () => {
           <button className="logout-admin" onClick={() => setShowViewDialogSinhVien(false)}>Chỉnh sửa</button>
             <button className="logout-admin" onClick={() => setShowViewDialogSinhVien(false)}>Đóng</button>
           </div>
-          </div>
+            </div>
           </div>
           <div className="profile-component-user">
             <div className="room-component">
@@ -327,65 +465,13 @@ const UserManagment = () => {
         </tr>
                     ))}
                   </table>
-                  <p>✏️Lịch sử sửa chữa phòng</p>
-                  <table>
-                    <thead>
-                    <tr>
-                      <th>STT</th>
-                      <th>NoiDung</th>
-                      <th>Thời gian thông báo</th>
-                      <th>Thời gian bảo trì</th>
-                      <th>Trạng Thái</th>
-                    </tr>
-                    </thead>
-                    {baotriphong.map((sv, index) => (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{sv.NoiDung}</td>
-                      <td>{new Date(sv.ThoiGian).toLocaleDateString('vi-VN')}</td>
-                      <td>{new Date(sv.TgianBaoTri).toLocaleDateString('vi-VN')}</td>
-                      <td>{sv.TrangThai}</td>
-
-                    </tr>
-                    ))}
-                  </table>
-                  <div className="expand-buttons">
-                    <button className="expand-btn"  onClick={handleOpenDangKySuaChua}>Đăng ký sửa chữa phòng</button>
-                  </div>
-                  {showDangKySuaChua && (
-                  <div className="modal">
-                    <div className="modal-content">
-                      <h3>Đăng ký sửa chữa phòng</h3>
-                      <textarea value={noiDungSuaChua} onChange={e => setNoiDungSuaChua(e.target.value)} placeholder="Nhập nội dung sửa chữa..." rows={4} style={{ width: "100%" }} />
-                      <div className="expand-buttons">
-                        <button className="expand-btn" onClick={handleDangKySuaChua}>Gửi</button>
-                        <button className="expand-btn" onClick={handleCloseDangKySuaChua}>Hủy</button>
-                      </div>
-                    </div>
-                  </div>
-                  )}
-                  <p>✏️Thông tin hóa đơn</p>
-                  <table>
-                    <tr>
-                      <th>STT</th>
-                      <th>Họ & Tên</th>
-                      <th>Ngày Sinh</th>
-                      <th>Trường</th>
-                      <th>Ngày Vào</th>
-                      <th>Ngày Vào</th>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Đàm Thị Nga</td>
-                      <td>19/05/2003</td>
-                      <td>Trường cao đẳng nghề bách khoa hà nội</td>
-                      <td>18/8/2025</td>
-                      <td>18/8/2025</td>
-                    </tr>
-                  </table>
             </div>
             <div className="contract-component">
                   <h3>🗂️Thông tin hợp đồng</h3>
+                  <p>✏️Trạng Thái Hợp Đồng : <p className={`trangthai ${ sinhvienuser.TrangThai === 'Đã Nhận Phòng' ? 'bg-green' :  sinhvienuser.TrangThai === 'Hết hạn' ? 'bg-red' : sinhvienuser.TrangThai === 'Sắp hết hạn' ? 'bg-yellow'  :  'bg-default'}`}>{sinhvienuser.TrangThai} </p></p>
+                  <div className="expand-buttons">
+                    <button className="expand-btn">Chỉnh sửa</button>
+                  </div>
                   <p>✏️Chi tiết hồ sơ </p>
                   <table>
                     <tr>
@@ -406,7 +492,7 @@ const UserManagment = () => {
                     </tr>
                   </table>
                   <div className="expand-buttons">
-                    <button className="expand-btn">Chỉnh sửa</button>
+                    <button className="expand-btn" onClick={handleOpenEditDialog}>Chỉnh sửa</button>
                   </div>
                   {openImage && (
               <div className="dialog-overlay" onClick={handleCloseImage}>
@@ -416,6 +502,25 @@ const UserManagment = () => {
                   }
                 </div>
               </div>
+                  )}
+                  {showEditDialog && (
+  <div className="modal" onClick={() => setShowEditDialog(false)}>
+    <div className="modal-content-room" onClick={(e) => e.stopPropagation()}>
+      <h3>📝 Chỉnh sửa hồ sơ</h3>
+      <label>Đơn Xin</label>
+      <input type="file"  onChange={(e) => setEditData({ ...editData, DonXin: e.target.files[0] })} /><br/>
+      <label>Giấy xác nhận sinh viên</label>
+      <input type="file"  onChange={(e) => setEditData({ ...editData, GiayXacNhanSinhVien: e.target.files[0] })} /><br/>
+      <label>CCCD PhoTo</label>
+      <input type="file"  onChange={(e) => setEditData({ ...editData, CCCDPhoTo: e.target.files[0] })} /><br/>
+      <label>Hợp Đồng</label>
+      <input type="file"  onChange={(e) => setEditData({ ...editData, HopDong: e.target.files[0] })} />
+      <div className="dialog-buttons">
+        <button className='a-btn'  onClick={handleSaveEdit}>💾 Lưu</button>
+        <button className='a-btn' onClick={() => setShowEditDialog(false)}>❌ Hủy</button>
+      </div>
+    </div>
+  </div>
                   )}
             </div>
             <div className="service-component">
@@ -468,6 +573,7 @@ const UserManagment = () => {
                       <th>SDT</th>
                       <th>Địa Chỉ</th>
                       <th>Quan Hệ</th>
+                      <th colSpan = "2">Chức Năng</th>
                     </tr>
                     {nguoithan.map((sv, index) => (
                       <tr key={index}>
@@ -476,12 +582,52 @@ const UserManagment = () => {
                         <td>{sv.SDT}</td>
                         <td>{sv.DiaChi}</td>
                         <td>{sv.QuanHe}</td>
+                        <td> <button className="expand-btn" onClick={() => handleEditNguoiThan(sv)}>Sửa</button></td>
+                        <td><button className="expand-btn" onClick={() => handleDeleteNguoiThan(sv.id)}>Xóa</button></td>
                       </tr>
                     ))}
                   </table>
                   <div className="expand-buttons">
-                    <button className="expand-btn">Chỉnh sửa thông tin </button>
+                    <button className="expand-btn" onClick={() => setShowAddDialog(true)}>Thêm Người Thân</button>
                   </div>
+                  {showAddDialog && (
+  <div className="modal" onClick={() => setShowAddDialog(false)}>
+    <div className="modal-content-room" onClick={(e) => e.stopPropagation()}>
+      <h3>➕ Thêm người thân</h3>
+      <label>Họ & Tên</label>
+      <input value={nguoiThanInput.HoTen} onChange={(e) => setNguoiThanInput({ ...nguoiThanInput, HoTen: e.target.value })} />
+      <label>SĐT</label>
+      <input value={nguoiThanInput.SDT} onChange={(e) => setNguoiThanInput({ ...nguoiThanInput, SDT: e.target.value })} />
+      <label>Địa chỉ</label>
+      <input value={nguoiThanInput.DiaChi} onChange={(e) => setNguoiThanInput({ ...nguoiThanInput, DiaChi: e.target.value })} />
+      <label>Quan hệ</label>
+      <input value={nguoiThanInput.QuanHe} onChange={(e) => setNguoiThanInput({ ...nguoiThanInput, QuanHe: e.target.value })} />
+      <div className="dialog-buttons">
+        <button className="a-btn" onClick={handleAddNguoiThan}>💾 Lưu</button>
+        <button className="a-btn" onClick={() => setShowAddDialog(false)}>❌ Hủy</button>
+      </div>
+    </div>
+  </div>
+                  )}
+                  {showEditNguoiThanDialog && (
+  <div className="modal" onClick={() => setShowEditNguoiThanDialog(false)}>
+    <div className="modal-content-room" onClick={(e) => e.stopPropagation()}>
+      <h3>📝 Chỉnh sửa người thân</h3>
+      <label>Họ & Tên</label>
+      <input  type="text"  value={editNguoiThanInput.HoTen}  onChange={(e) =>  setEditNguoiThanInput({ ...editNguoiThanInput, HoTen: e.target.value }) }/><br/>
+      <label>SĐT</label>
+      <input type="text" value={editNguoiThanInput.SDT}onChange={(e) => setEditNguoiThanInput({ ...editNguoiThanInput, SDT: e.target.value })}/><br/>
+      <label>Địa chỉ</label>
+      <input type="text" value={editNguoiThanInput.DiaChi} onChange={(e) => setEditNguoiThanInput({ ...editNguoiThanInput, DiaChi: e.target.value }) }/><br/>
+      <label>Quan hệ</label>
+      <input  type="text"  value={editNguoiThanInput.QuanHe} onChange={(e) =>  setEditNguoiThanInput({ ...editNguoiThanInput, QuanHe: e.target.value })  } />
+      <div className="dialog-buttons">
+        <button className="a-btn" onClick={handleSaveEditNguoiThan}>💾 Lưu</button>
+        <button className="a-btn" onClick={() => setShowEditNguoiThanDialog(false)}>❌ Hủy</button>
+      </div>
+    </div>
+  </div>
+                  )}
                   <p>✏️Lịch sử đăng ký thăm  </p>
                   <table>
                     <tr>
@@ -491,6 +637,7 @@ const UserManagment = () => {
                       <th>Tgian Bắt Đầu</th>
                       <th>Tgian Kết TThúc </th>
                       <th>Trang Thai</th>
+                      <th>Chức Năng</th>
                     </tr>
                     {dangkytham.map((sv, index) => (
                     <tr key={index}>
@@ -500,9 +647,34 @@ const UserManagment = () => {
                       <td>{new Date(sv.TgianBatDau).toLocaleDateString('vi-VN')}</td>
                       <td>{new Date(sv.TgianKetThuc).toLocaleDateString('vi-VN')}</td>
                       <td>{sv.TrangThai}</td>
+                      <td> <button className="expand-btn" onClick={() => handleEditDangKyTham(sv)}>Sửa</button></td>
                     </tr>
                     ))}
                   </table>
+                  {showEditTham && (
+  <div className="modal" onClick={() => setShowEditTham(false)}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <h3>✏️ Sửa trạng thái đăng ký thăm</h3>
+
+      <label>Trạng thái</label>
+      <select
+        value={dangKyThamEdit.TrangThai}
+        onChange={(e) =>
+          setDangKyThamEdit({ ...dangKyThamEdit, TrangThai: e.target.value })
+        }
+      >
+        <option value="Chờ duyệt">Chờ duyệt</option>
+        <option value="Đã duyệt">Đã duyệt</option>
+        <option value="Từ chối">Từ chối</option>
+      </select>
+
+      <div className="dialog-buttons">
+        <button className="a-btn" onClick={handleSaveEditDangKyTham}>💾 Lưu</button>
+        <button className="a-btn" onClick={() => setShowEditTham(false)}>❌ Hủy</button>
+      </div>
+    </div>
+  </div>
+                  )}
             </div>
             <div className="discipline-component">
                   <h3>🗂️Kỷ luật</h3>
@@ -513,7 +685,7 @@ const UserManagment = () => {
                       <th>Nội Dung</th>
                       <th>Ngày Vi Phạm</th>
                       <th>Hình Thức Xử Lý</th>
-                      <th>Chức năng</th>
+                      <th colSpan={2}>Chức năng</th>
                     </tr>
                     {kyluat.map((sv, index) => (
                     <tr key={index}>
@@ -521,14 +693,50 @@ const UserManagment = () => {
                       <td>{sv.NoiDungViPham}</td>
                       <td>{new Date(sv.NgayViPham).toLocaleDateString('vi-VN')}</td>
                       <td>{sv.HinhThucXuLy}</td>
-                      <td><button className="expand-btn">Sửa</button></td>
-                      <td><button className="expand-btn">Xóa</button></td>
+                      <td><button className="expand-btn" onClick={() => handleEditKyLuat(sv)}>Sửa</button></td>
+                      <td><button className="expand-btn" onClick={() => handleDeleteKyLuat(sv.ID)}>Xóa</button></td>
                     </tr>
                     ))}
                   </table>
                   <div className="expand-buttons">
-                    <button className="expand-btn">Thêm kỉ luật </button>
+                    <button className="expand-btn"  onClick={() => setShowAddKyLuat(true)}>Thêm kỉ luật </button>
                   </div>
+                  {showAddKyLuat && (
+                  <div className="modal" onClick={() => setShowAddKyLuat(false)}>
+                    <div className="modal-content-room" onClick={(e) => e.stopPropagation()}>
+                      <h3>➕ Thêm kỷ luật</h3>
+                      <label>Nội dung vi phạm</label>
+                      <input value={kyLuatInput.NoiDungViPham} onChange={(e) => setKyLuatInput({ ...kyLuatInput, NoiDungViPham: e.target.value })} />
+                      <label>Ngày vi phạm</label>
+                      <input type="date" value={kyLuatInput.NgayViPham} onChange={(e) => setKyLuatInput({ ...kyLuatInput, NgayViPham: e.target.value })} />
+                      <label>Hình thức xử lý</label>
+                      <input value={kyLuatInput.HinhThucXuLy} onChange={(e) => setKyLuatInput({ ...kyLuatInput, HinhThucXuLy: e.target.value })} />
+
+                      <div className="dialog-buttons">
+                        <button className="a-btn" onClick={handleAddKyLuat}>💾 Lưu</button>
+                        <button className="a-btn" onClick={() => setShowAddKyLuat(false)}>❌ Hủy</button>
+                      </div>
+                    </div>
+                  </div>
+                  )}
+                  {showEditKyLuat && (
+                    <div className="modal" onClick={() => setShowEditKyLuat(false)}>
+                      <div className="modal-content-room" onClick={(e) => e.stopPropagation()}>
+                        <h3>📝 Chỉnh sửa kỷ luật</h3>
+                        <label>Nội dung vi phạm</label>
+                        <input value={kyLuatEdit.NoiDungViPham} onChange={(e) => setKyLuatEdit({ ...kyLuatEdit, NoiDungViPham: e.target.value })} />
+                        <label>Ngày vi phạm</label>
+                        <input type="date" value={kyLuatEdit.NgayViPham} onChange={(e) => setKyLuatEdit({ ...kyLuatEdit, NgayViPham: e.target.value })} />
+                        <label>Hình thức xử lý</label>
+                        <input value={kyLuatEdit.HinhThucXuLy} onChange={(e) => setKyLuatEdit({ ...kyLuatEdit, HinhThucXuLy: e.target.value })} />
+
+                        <div className="dialog-buttons">
+                          <button className="a-btn" onClick={handleSaveEditKyLuat}>💾 Lưu</button>
+                          <button className="a-btn" onClick={() => setShowEditKyLuat(false)}>❌ Hủy</button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
             </div>
             <div className="history-component">
                   <h3>🗂️Lịch Sử Ra / Vào</h3>

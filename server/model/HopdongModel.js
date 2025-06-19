@@ -30,7 +30,7 @@ export const getHopDongByMaSV = async (id) => {
 };
 export const getHopDongByIdTaiKhoan = async (id) => {
   try {
-    const [rows] = await db.query('SELECT taikhoan.id,DonXin,GiayXacNhanSinhVien,CCCDPhoTo,HopDong FROM taikhoan,sinhvien,hopdong,hoso WHERE taikhoan.MaSV = sinhvien.id and sinhvien.id = hopdong.MaSV and hopdong.id=hoso.MaHD AND taikhoan.id = ?', [id]);
+    const [rows] = await db.query('SELECT taikhoan.id,DonXin,GiayXacNhanSinhVien,CCCDPhoTo,HopDong, hoso.MaHD FROM taikhoan,sinhvien,hopdong,hoso WHERE taikhoan.MaSV = sinhvien.id and sinhvien.id = hopdong.MaSV and hopdong.id=hoso.MaHD AND taikhoan.id = ?', [id]);
     return rows[0];
   } catch (error) {
     console.error('Lỗi khi lấy danh sách hopdong:', error);

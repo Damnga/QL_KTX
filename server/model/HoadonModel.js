@@ -2,7 +2,7 @@ import db from '../config/database.js';
 
 export const getAllHoaDon = async () => {
   try {
-    const [rows] = await db.query('SELECT * FROM hoadon');
+    const [rows] = await db.query('SELECT h.id, TenTN, TenPhong, h.GhiChu, h.TgianBatDau, h.TgianKetThuc, SUM((cthd.SoSau - cthd.SoDau) * cthd.DonGia) AS TongTien, h.NgayThanhToan, tk.Username, h.TrangThai FROM hoadon h LEFT JOIN taikhoan tk ON tk.id = h.MaNguoiLap LEFT JOIN phong p ON h.MaPhong = p.MaPhong LEFT JOIN chitiethoadon cthd ON h.id = cthd.MaHD LEFT JOIN toanha tn ON p.MaTN = tn.MaTN GROUP BY h.id ORDER BY h.id DESC');
     return rows;
   } catch (error) {
     console.error('Lỗi khi lấy danh sách hoa don:', error);
@@ -23,12 +23,12 @@ export const getHoaDonById = async (id) => {
 export const createHoaDon = async (hoadon) => {
   try {
     const { MaPhong, NgayLap, MaNguoiLap, TrangThai, NgayThanhToan, GhiChu, TgianBatDau, TgianKetThuc } = hoadon;
-    await db.query(
+    const [result] =  await db.query(
       'INSERT INTO hoadon ( MaPhong, NgayLap, MaNguoiLap, TrangThai, NgayThanhToan, GhiChu, TgianBatDau, TgianKetThuc) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
       [MaPhong, NgayLap, MaNguoiLap, TrangThai, NgayThanhToan, GhiChu, TgianBatDau, TgianKetThuc]
     );
+     return { id: result.insertId, message: "Tạo hóa đơn thành công" };
   } catch (error) {
-    console.error('Error in createHoaDon:', error);
     throw error;
   }
 };

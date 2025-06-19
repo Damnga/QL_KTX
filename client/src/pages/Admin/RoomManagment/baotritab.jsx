@@ -126,7 +126,7 @@ const baotritab = () => {
         const updatedListdata = await getAllBaoTriData(token);
         setbaotrilist(updatedList);
         setbaotrilistdata(updatedListdata);
-         toast.success('Thành công');
+        toast.success('Thành công');
       } catch (err) {
         toast.error(err?.error || 'Có lỗi xảy ra!');
       } finally {
@@ -254,7 +254,7 @@ const baotritab = () => {
                       <td>{new Date(row.ThoiGian).toLocaleDateString('vi-VN')}</td>
                       <td>{row.TgianBaoTri && !isNaN(new Date(row.TgianBaoTri))   ? new Date(row.TgianBaoTri).toLocaleDateString("vi-VN")   : ""}</td>
                       <td className={`trangthai ${  row.TrangThai === 'Đã bảo trì' ? 'bg-green' :  row.TrangThai === 'Chờ tiếp nhận' ? 'bg-red' :  'bg-default'}`}> {row.TrangThai}</td>
-                      <td><button className='a' onClick={() => handleEditBaoTri(fullBaoTri)}>✏️Sửa</button></td>
+                      <td><button className='a' onClick={() => handleEditBaoTri(row)}>✏️Sửa</button></td>
                       <td><button className='a' onClick={() => handleDeleteBaoTri(row)}>❌Xóa</button></td>
                     </tr>
                   )})}
@@ -291,51 +291,51 @@ const baotritab = () => {
                       </div>
               )}
               {isAddModalOpenBaoTri && (
-                      <div className="modal">
-                        <div className="modal-content-room">
-                          <h3>THÊM THÔNG TIN BẢO TRÌ</h3>
-                          <div>
-                            <label>Nội Dung:</label>
-                            <input  type="text"  value={editingBaoTri.NoiDung}
-                              onChange={(e) => setEditingBaoTri({ ...editingBaoTri, NoiDung: e.target.value })}
-                            /><br/>
-                            <label>Tòa Nhà:</label>
-                            <select value={selectedMaTN}
-                              onChange={(e) => { const maTN = e.target.value;  setSelectedMaTN(maTN);
-                                  setEditingBaoTri({ ...editingBaoTri, MaPhong: "" });
-                              }}>
-                              <option value="">-- Chọn tòa nhà --</option>
-                                {toaNhaList.map((loai) => (
-                                <option key={loai.MaTN} value={loai.MaTN}>{loai.TenTN} </option>
-                                ))}
-                            </select><br/>
-                            <label>Tên Phòng:</label>
-                            <select value={editingBaoTri.MaPhong}
-                              onChange={(e) => setEditingBaoTri({ ...editingBaoTri, MaPhong: e.target.value })}
-                            >
-                              <option value="">-- Chọn phòng --</option>
-                                {phongTheoToa.map((loai) => (
-                              <option key={loai.MaPhong} value={loai.MaPhong}>
-                                    {loai.TenPhong}
-                              </option>
-                              ))}
-                            </select>
-                            <br/>
-                          </div>
-                          <button className='a-btn' onClick={handleCreateBaoTri}>Lưu</button>
-                          <button className='a-btn' onClick={handleCloseAddBaoTri}>Thoát</button>
-                        </div>
-                      </div>
+                <div className="modal">
+                  <div className="modal-content-room">
+                    <h3>THÊM THÔNG TIN BẢO TRÌ</h3>
+                    <div>
+                      <label>Nội Dung:</label>
+                      <input  type="text"  value={editingBaoTri.NoiDung}
+                        onChange={(e) => setEditingBaoTri({ ...editingBaoTri, NoiDung: e.target.value })}
+                      /><br/>
+                      <label>Tòa Nhà:</label>
+                      <select value={selectedMaTN}
+                        onChange={(e) => { const maTN = e.target.value;  setSelectedMaTN(maTN);
+                            setEditingBaoTri({ ...editingBaoTri, MaPhong: "" });
+                        }}>
+                        <option value="">-- Chọn tòa nhà --</option>
+                          {toaNhaList.map((loai) => (
+                          <option key={loai.MaTN} value={loai.MaTN}>{loai.TenTN} </option>
+                          ))}
+                      </select><br/>
+                      <label>Tên Phòng:</label>
+                      <select value={editingBaoTri.MaPhong}
+                        onChange={(e) => setEditingBaoTri({ ...editingBaoTri, MaPhong: e.target.value })}
+                      >
+                        <option value="">-- Chọn phòng --</option>
+                          {phongTheoToa.map((loai) => (
+                        <option key={loai.MaPhong} value={loai.MaPhong}>
+                              {loai.TenPhong}
+                        </option>
+                        ))}
+                      </select>
+                      <br/>
+                    </div>
+                    <button className='a-btn' onClick={handleCreateBaoTri}>Lưu</button>
+                    <button className='a-btn' onClick={handleCloseAddBaoTri}>Thoát</button>
+                  </div>
+                </div>
               )}
               {showImportDialogBaoTri && (
-                      <div className="modal">
-                        <div className="modal-content-excel">
-                          <h3>Nhập danh sách bảo trì từ Excel</h3>
-                          <input type="file" accept=".xlsx, .xls" onChange={handleImportExcelBaoTri} /><br/>
-                          <button className="a-btn" onClick={handleConfirmImportBaoTri}>Đồng Ý Nhập</button>
-                          <button className="a-btn" onClick={() => setShowImportDialogBaoTri(false)}>Hủy</button>
-                        </div>
-                      </div>
+                <div className="modal">
+                  <div className="modal-content-excel">
+                    <h3>Nhập danh sách bảo trì từ Excel</h3>
+                    <input type="file" accept=".xlsx, .xls" onChange={handleImportExcelBaoTri} /><br/>
+                    <button className="a-btn" onClick={handleConfirmImportBaoTri}>Đồng Ý Nhập</button>
+                    <button className="a-btn" onClick={() => setShowImportDialogBaoTri(false)}>Hủy</button>
+                  </div>
+                </div>
               )}
             </div>
           </div>

@@ -4,18 +4,20 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/hoa_don';
 
 
-export const createHoaDon = async (formData) => {
+export const createHoaDon = async (data) => {
   try {
-    const response = await axios.post(`${API_URL}/create`, formData, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.data;
+    const response = await axios.post(`${API_URL}/create`, data);
+    return { success: true, data: response.data };
   } catch (error) {
-    throw error.response?.data;
+    const errMessage =
+      error.response?.data?.message ||
+      error.message ||
+      'Lỗi tạo hóa đơn';
+
+    return { success: false, error: errMessage };
   }
 };
+
 
 export const getAllHoaDon = async (token) => {
   try {
@@ -56,9 +58,9 @@ export const getByIdHoaDon = async (id, token) => {
   }
 };
 
-export const editHoaDon = async (id, formData, token) => {
+export const editHoaDon = async (id, data, token) => {
   try {
-    const response = await axios.put(`${API_URL}/${id}`, formData, {
+    const response = await axios.put(`${API_URL}/${id}`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

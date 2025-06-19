@@ -3,20 +3,16 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000/nguoi_than';
 
-export const createNguoiThan = async (formData) => {
+export const createNguoiThan = async (data) => {
   try {
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-    const response = await axios.post(`${API_URL}/create`, formDataToSend, {
+    const response = await axios.post(`${API_URL}/create`, data, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
       },
     });
     return response.data;
   } catch (error) {
-    throw error.response?.data;
+    throw error.response?.data || error.message;
   }
 };
 
@@ -73,23 +69,19 @@ export const getByIdNguoiThanSinhVien = async (MaSV, token) => {
 
 export const editNguoiThan = async (id, formData, token) => {
   try {
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-
-    const response = await axios.put(`${API_URL}/${id}`, formDataToSend, {
+    const response = await axios.put(`${API_URL}/${id}`, formData, {
       headers: {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
       },
     });
 
     return response.data;
   } catch (error) {
-    throw error.response?.data;
+    throw error.response?.data || error.message;
   }
 };
+
 
 export const removeNguoiThan = async (id, token) => {
   try {

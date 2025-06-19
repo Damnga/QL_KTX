@@ -4,8 +4,8 @@ import {getAllHoaDon, getHoaDonById, createHoaDon, updateHoaDon, deleteHoaDon} f
 export const create = async (req, res, next) => {
   try {
     const {MaPhong, NgayLap, MaNguoiLap, TrangThai, NgayThanhToan, GhiChu, TgianBatDau, TgianKetThuc} = req.body;
-    await createHoaDon({MaPhong, NgayLap, MaNguoiLap, TrangThai, NgayThanhToan, GhiChu, TgianBatDau, TgianKetThuc});
-    res.status(201).json({ message: 'Tạo hoa don thành công' });
+    const result = await createHoaDon({MaPhong, NgayLap, MaNguoiLap, TrangThai, NgayThanhToan, GhiChu, TgianBatDau, TgianKetThuc});
+    res.status(201).json({ message: 'Tạo hoa don thành công',id: result.id });
   } catch (err) {
     next(err);
   }
@@ -34,7 +34,7 @@ export const update = async (req, res, next) => {
       const id = req.params.id;
       const {MaPhong, NgayLap, MaNguoiLap, TrangThai, NgayThanhToan, GhiChu, TgianBatDau, TgianKetThuc } = req.body;
       await updateHoaDon(id, { MaPhong, NgayLap, MaNguoiLap, TrangThai, NgayThanhToan, GhiChu, TgianBatDau, TgianKetThuc });
-      res.json({ message: 'Cập nhật hoadon thành công' });
+      res.json({ message: 'Cập nhật hoa don thành công' });
     } catch (err) {
       next(err);
     }
@@ -43,7 +43,7 @@ export const remove = async (req, res, next) => {
   try {
     const id = req.params.id;
     await deleteHoaDon(id);
-    res.json({ message: 'Xóa hoadon thành công' });
+    res.json({ message: 'Xóa hoa don thành công' });
   } catch (err) {
     next(err);
   }

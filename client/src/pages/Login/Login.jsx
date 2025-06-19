@@ -25,7 +25,6 @@ const Login = () => {
               try {
                 const datalist = await getAllSinhVien();
                 setStudenEmail(datalist);
-                console.log("Danh sách sinh viên:", datalist);
               } catch (err) {
                 console.error('Lỗi khi tải danh sách:', err);
               } finally {

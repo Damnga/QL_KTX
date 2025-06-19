@@ -35,6 +35,7 @@ export const getHoSoId = async (req, res, next) => {
 };
 export const update = async (req, res, next) => {
     try {
+      const {MaHD }= req.body;
       const files = req.files;
       const DonXin = files?.DonXin?.[0]?.filename ;
       const GiayXacNhanSinhVien = files?.GiayXacNhanSinhVien?.[0]?.filename ;
@@ -49,7 +50,7 @@ export const update = async (req, res, next) => {
 export const remove = async (req, res, next) => {
   try {
     const id = req.params.MaHD;
-    await deleteHoSo(MaHD);
+    await deleteHoSo(id);
     res.json({ message: 'Xóa ho so thành công' });
   } catch (err) {
     next(err);
