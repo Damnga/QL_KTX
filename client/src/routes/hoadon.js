@@ -32,9 +32,9 @@ export const getAllHoaDon = async (token) => {
   }
 };
 
-export const getAllHoaDonData = async (token) => {
+export const getAllHoaDonData = async (id,token) => {
   try {
-    const response = await axios.get(`${API_URL}/select_data`, {
+    const response = await axios.get(`${API_URL}/select_data/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -324,8 +324,8 @@ const BillManagment = () => {
                 <td>{row.NgayThanhToan && !isNaN(new Date(row.NgayThanhToan))   ? new Date(row.NgayThanhToan).toLocaleDateString("vi-VN") : ""}</td>
                 <td>{row.Username}</td>
                 <td className={`trangthai ${  row.TrangThai === 'Đã Thanh Toán' ? 'bg-green' :  row.TrangThai === 'Chưa Thanh Toán' ? 'bg-red' :  'bg-default'}`}> {row.TrangThai}</td>
-                <td><button className='a-btn' onClick={(e) => { e.stopPropagation(); handleEditHoaDon(row); }}>Sửa</button></td>
-                <td><button className='a-btn' onClick={(e) => { e.stopPropagation(); handleDeleteHoaDon(row); }}>Xóa</button></td>
+                <td><button className='a' onClick={(e) => { e.stopPropagation(); handleEditHoaDon(row); }}>Sửa</button></td>
+                <td><button className='a' onClick={(e) => { e.stopPropagation(); handleDeleteHoaDon(row); }}>Xóa</button></td>
               </tr>
             ))}
           </tbody>

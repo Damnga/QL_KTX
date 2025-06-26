@@ -57,8 +57,7 @@
   .navbar_container_right a:hover {
     color: red;
   }
-  
-  /* Dropdown menu */
+
   .dropdown_menu {
     display: none;
     position: absolute;
@@ -88,8 +87,7 @@
   .dropdown_menu li a:hover {
     color: red;
   }
-  
-  /* Submenu */
+
   .submenu {
     position: relative;
   }

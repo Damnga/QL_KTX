@@ -11,7 +11,7 @@ export const getAllPhong = async () => {
 };
 export const getAllPhongData = async () => {
   try {
-const [rows] = await db.query(`SELECT  phong.MaPhong, phong.TenPhong, loaiphong.LoaiPhong, toanha.TenTN, phong.TrangThai,loaiphong.SoNguoi, phong.GhiChu,  COUNT(hopdong.id) AS SoLuongHopDong FROM phong JOIN loaiphong ON phong.MaLoai = loaiphong.MaLoai JOIN toanha ON phong.MaTN = toanha.MaTN  LEFT JOIN hopdong ON phong.MaPhong = hopdong.MaPhong GROUP BY   phong.MaPhong, phong.TenPhong,  loaiphong.LoaiPhong,   toanha.TenTN,  phong.TrangThai,  loaiphong.SoNguoi, phong.GhiChu`);
+const [rows] = await db.query(`SELECT toanha.MaTN, phong.MaPhong, phong.TenPhong, loaiphong.LoaiPhong, toanha.TenTN, phong.TrangThai,loaiphong.SoNguoi, phong.GhiChu, COUNT(hopdong.id) AS SoLuongHopDong FROM phong JOIN loaiphong ON phong.MaLoai = loaiphong.MaLoai JOIN toanha ON phong.MaTN = toanha.MaTN  LEFT JOIN hopdong ON phong.MaPhong = hopdong.MaPhong GROUP BY   phong.MaPhong, phong.TenPhong,  loaiphong.LoaiPhong,   toanha.TenTN,  phong.TrangThai,  loaiphong.SoNguoi, phong.GhiChu`);
     return rows;
   } catch (error) {
     console.error('Lỗi khi lấy danh sách phòng:', error);
@@ -21,7 +21,7 @@ const [rows] = await db.query(`SELECT  phong.MaPhong, phong.TenPhong, loaiphong.
 
 export const getPhongById = async (MaPhong) => {
   try {
-    const [rows] = await db.query('SELECT * FROM phong WHERE MaPhong = ?', [MaPhong]);
+    const [rows] = await db.query('SELECT phong.MaPhong, phong.TenPhong, phong.MaLoai, phong.MaTN, phong.TrangThai, phong.GhiChu, toanha.TenTN FROM phong,toanha WHERE phong.MaTN = toanha.MaTN AND phong.MaPhong = ?', [MaPhong]);
     return rows[0];
   } catch (error) {
     console.error('Lỗi khi lấy danh sách phòng:', error);

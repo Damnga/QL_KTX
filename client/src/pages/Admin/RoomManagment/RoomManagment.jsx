@@ -240,6 +240,7 @@ const phongtab = () => {
                     <th>STT</th>
                     <th>Tên Phòng</th>
                     <th>Loại Phòng</th>
+                    <th>Giới Tính</th>
                     <th>Tòa Nhà</th>
                     <th>Trạng Thái</th>
                     <th>Số Người trong Phòng</th>
@@ -252,6 +253,7 @@ const phongtab = () => {
                       <td >{index + 1}</td>
                       <td>{row.TenPhong}</td>
                       <td>{row.LoaiPhong}</td>
+                      <td>{row.GhiChu}</td>
                       <td>{row.TenTN}</td>
                       <td className={`trangthai ${  row.TrangThai === 'Trống' ? 'bg-green' :  row.TrangThai === 'Đã đầy' ? 'bg-red' :  row.TrangThai === 'Còn chỗ' ? 'bg-yellow' :  row.TrangThai === 'Đang Sửa Chữa' ? 'bg-orange' :  'bg-default'}`}> {row.TrangThai}</td>
                       <td>{row.SoLuongHopDong}/{row.SoNguoi}</td>

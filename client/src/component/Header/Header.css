@@ -1,4 +1,4 @@
-.header_container{
+/* .header_container{
     background-color: #f9f9f9;
     border-bottom: 1px solid #ddd;
 }
@@ -99,4 +99,169 @@
     display: inline-block;
   }
   
-  
+   */
+
+   .header_container {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  flex-wrap: wrap; /* Cho phép xuống dòng khi cần */
+}
+
+.header_left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.language {
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+.language:hover {
+  color: red;
+}
+
+.hotline {
+  font-size: 16px;
+  color: #333;
+}
+
+.hotline_number {
+  color: red;
+  font-weight: 1000;
+}
+
+.header_center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.header_center a {
+  margin: 0 10px;
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+}
+
+.header_center a:hover {
+  color: red;
+}
+
+.header_right {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.search_bar {
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  max-width: 200px;
+}
+
+.search_button {
+  border: none;
+  background-color: #f9f9f9;
+}
+
+.search_button_icon {
+  width: 14px;
+}
+
+.search_button:hover {
+  cursor: pointer;
+}
+
+.language_container {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 8px;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.language_container p {
+  margin: 4px 0;
+  cursor: pointer;
+}
+
+.language_container p:hover {
+  scale: 1.1;
+}
+
+.language_wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* ======================
+   Responsive (Tablet + Mobile)
+   ====================== */
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .header_center {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .header_right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .search_bar {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header_center a {
+    font-size: 14px;
+    margin: 5px;
+  }
+
+  .hotline {
+    font-size: 14px;
+  }
+
+  .language {
+    font-size: 14px;
+  }
+
+  .search_bar {
+    font-size: 13px;
+  }
+
+  .search_button_icon {
+    width: 12px;
+  }
+}

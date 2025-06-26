@@ -36,7 +36,7 @@ export default function InvoicePage({ data }) {
                       <p><strong>BAN QUẢN LÝ KHU NHÀ Ở SINH VIÊN PHÁP VÂN</strong></p>
                       <p><strong>PHÒNG QUẢN LÝ SINH VIÊN</strong></p>
                       <h2>THÔNG BÁO THU TIỀN ĐIỆN NƯỚC</h2>
-                      <p>Chỉ số điện chốt từ ngày <strong>{new Date(inv.TgianBatDau).toLocaleDateString('vi-VN')}</strong> đến <strong>{new Date(inv.TgianKetThuc).toLocaleDateString('vi-VN')}</strong></p>
+                      <p>Chỉ số chốt từ ngày <strong>{new Date(inv.TgianBatDau).toLocaleDateString('vi-VN')}</strong> đến <strong>{new Date(inv.TgianKetThuc).toLocaleDateString('vi-VN')}</strong></p>
                     </div>
                     <div className="right-qr">
                       <p><strong>Sinh viên chuyển tiền điện nước</strong></p>

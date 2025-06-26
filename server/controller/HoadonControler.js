@@ -1,5 +1,5 @@
 
-import {getAllHoaDon, getHoaDonById, createHoaDon, updateHoaDon, deleteHoaDon} from "../model/HoadonModel.js"
+import {getAllHoaDon,getHoaDonByIdMaSV, getHoaDonById, createHoaDon, updateHoaDon, deleteHoaDon} from "../model/HoadonModel.js"
 
 export const create = async (req, res, next) => {
   try {
@@ -23,6 +23,16 @@ export const getHoaDonId = async (req, res, next) => {
   try {
     const id = req.params.id;
     const phong = await getHoaDonById(id);
+    if (!phong) return res.status(404).json({ message: 'Không tìm thấy hoadon' });
+    res.json(phong);
+  } catch (err) {
+    next(err);
+  }
+};
+export const getHoaDonIdSinhVien = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const phong = await getHoaDonByIdMaSV(id);
     if (!phong) return res.status(404).json({ message: 'Không tìm thấy hoadon' });
     res.json(phong);
   } catch (err) {

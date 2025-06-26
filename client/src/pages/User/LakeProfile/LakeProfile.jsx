@@ -14,6 +14,7 @@ import {getByIdDangKyThamSinhVien,createDangKyTham} from "../../../routes/dangky
 import {getByIdKyLuatSinhVien} from "../../../routes/kyluat";
 import {getByIdLichSuRaVaoSinhVien} from "../../../routes/lichsuravao";
 import {handleThanhToan} from "../../../routes/thanhtoan";
+import {getAllHoaDonData} from "../../../routes/hoadon";
 const LakeProfile = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
@@ -32,6 +33,7 @@ const LakeProfile = () => {
   const [kyluat,setkyluat]=useState([]);
   const [lichsuravao,setlichsuravao]=useState([]);
   const [maphongbytksinhvien,setmaphongbytksinhvien]=useState({});
+  const [hoadon,sethoadon]=useState([]);
   const handleOpenImage = (filePath) => {
     setOpenImage(filePath);
   };
@@ -77,7 +79,8 @@ const LakeProfile = () => {
       setlichsuravao(lichsuravaosinhvien);
       const maphongsinhvien = await getByIdTenPhong(userMaSV);
       setmaphongbytksinhvien(maphongsinhvien);
-      console.log(maphongsinhvien);
+      const hoadonsinhvien = await getAllHoaDonData(userMaSV);
+      sethoadon(hoadonsinhvien);
     } catch (err) {
       toast.error(err);
     } finally {
@@ -287,22 +290,26 @@ const LakeProfile = () => {
             <table>
               <tr>
                 <th>STT</th>
-                <th>Họ & Tên</th>
-                <th>Ngày Sinh</th>
-                <th>Trường</th>
-                <th>Ngày Vào</th>
-                <th>Ngày Vào</th>
-                <th colSpan="2">Chức năng</th>
+                <th>Nội Dung</th>
+                <th>Ngày Thanh Toán</th>
+                <th>Người Thanh Toán</th>
+                <th>Tổng tiền </th>
+                <th>Trạng Thái</th>
+                <th>Chức Năng</th>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Đàm Thị Nga</td>
-                <td>19/05/2003</td>
-                <td>Trường cao đẳng nghề bách khoa hà nội</td>
-                <td>18/8/2025</td>
-                <td>18/8/2025</td>
-                <td><button className="expand-btn">Thanh Toán</button></td>
-              </tr>
+              {hoadon.map((sv, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{sv.GhiChu}</td>
+                    <td>{sv.NgayThanhToan}</td>
+                    <td>{sv.MaNguoiLap}</td>
+                    <td>{sv.TongTien}</td>
+                    <td>{sv.TrangThai}</td>
+                    <td><button className="expand-btn">Thanh Toán</button></td>
+                  </tr>
+                );
+              })}
             </table>
           </div>
           <div className="contract-component">

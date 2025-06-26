@@ -3,9 +3,9 @@ import {getAllSinhVien,getSinhVienByCCCD, getAllSinhVienData,getSinhVienByIdSinh
 
 export const create = async (req, res, next) => {
   try {
-    const {MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, GhiChu} = req.body;
+    const {MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, GhiChu,TrangThai} = req.body;
     const anh = req.file?.filename || null;
-    const newSinhVien = await createSinhVien({MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, anh, GhiChu});
+    const newSinhVien = await createSinhVien({MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, anh, GhiChu,TrangThai});
     res.status(201).json({...newSinhVien, message: 'Tạo sinh vien thành công' });
   } catch (err) {
     next(err);
@@ -13,7 +13,7 @@ export const create = async (req, res, next) => {
 };
 export const create2 = async (req, res, next) => {
   try {
-    const { MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, GhiChu } = req.body;
+    const { MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, GhiChu,TrangThai } = req.body;
     const anh = req.file?.filename || null;
 
     // ✅ Kiểm tra MaSV đã tồn tại chưa
@@ -28,7 +28,7 @@ export const create2 = async (req, res, next) => {
       return res.status(400).json({ message: 'Email đã được sử dụng' });
     }
 
-    const newSinhVien = await createSinhVien({ MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, anh, GhiChu });
+    const newSinhVien = await createSinhVien({ MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, anh, GhiChu,TrangThai});
     res.status(201).json({ ...newSinhVien, message: 'Tạo sinh viên thành công' });
   } catch (err) {
     next(err);

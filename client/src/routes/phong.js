@@ -42,11 +42,11 @@ export const getAllPhongData = async (token) => {
   }
 };
 
-export const getByIdPhong = async (MaPhong, token) => {
+export const getByIdPhong = async (MaPhong) => {
   try {
     const response = await axios.get(`${API_URL}/${MaPhong}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
     });
     return response.data;

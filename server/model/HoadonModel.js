@@ -20,6 +20,16 @@ export const getHoaDonById = async (id) => {
   }
 };
 
+export const getHoaDonByIdMaSV = async (id) => {
+  try {
+    const [rows] = await db.query('SELECT sinhvien.id, hoadon.GhiChu, hoadon.TgianBatDau, hoadon.TgianKetThuc, hoadon.NgayThanhToan, hoadon.MaNguoiLap,SUM((chitiethoadon.SoSau - chitiethoadon.SoDau) * chitiethoadon.DonGia) AS TongTien , hoadon.TrangThai FROM sinhvien JOIN hopdong ON sinhvien.id = hopdong.MaSV JOIN phong ON hopdong.MaPhong = phong.MaPhong JOIN hoadon ON phong.MaPhong = hoadon.MaPhong JOIN chitiethoadon ON hoadon.id = chitiethoadon.MaHD WHERE sinhvien.id = ? group by hoadon.id', [id]);
+    return rows;
+  } catch (error) {
+    console.error('Lỗi khi lấy danh sách hoa don:', error);
+    throw error;
+  }
+};
+
 export const createHoaDon = async (hoadon) => {
   try {
     const { MaPhong, NgayLap, MaNguoiLap, TrangThai, NgayThanhToan, GhiChu, TgianBatDau, TgianKetThuc } = hoadon;

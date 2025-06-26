@@ -20,16 +20,21 @@
   
 }
   
-  .step-form input {
-    display: block;
-    width: 98%;
-    padding: 10px 12px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
-  }
-  
+.step-form input,
+.step-form select {
+  display: block;
+  width: 98%;
+  padding: 10px 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #fff; 
+}
+  .step-form select option {
+  padding: 10px;
+  font-size: 14px;
+}
   .step-buttons {
     margin-top: 30px;
     text-align: center;
@@ -121,3 +126,67 @@
   background-color: #f9f9f9;
 }
 
+
+
+.room-container {
+  margin-top: 10px;
+}
+
+.floor-select {
+  margin-bottom: 10px;
+}
+
+.room-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.room-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 230px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.room-card h3  {
+text-align: center;
+}
+.room-card p {
+text-align: center;
+font-size: 16px;
+}
+
+.room-card.selected {
+  border: 2px solid blue;
+}
+
+.room-card h4 {
+  font-size: 16px;
+}
+
+.room-info {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.icon-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.icon-person {
+  font-size: 18px;
+  margin: 2px;
+  color: red;
+}
+
+.icon-person.available {
+  color: limegreen;
+}
+
+.gender-icon {
+  color: deeppink;
+  margin-left: 4px;
+}

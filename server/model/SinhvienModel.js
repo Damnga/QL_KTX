@@ -2,7 +2,7 @@ import db from '../config/database.js';
 
 export const getAllSinhVien = async () => {
   try {
-    const [rows] = await db.query('SELECT DISTINCT sinhvien.id ,sinhvien.MaSV,sinhvien.anh,sinhvien.HoTen, sinhvien.NgaySinh,sinhvien.Email,hopdong.id AS IDHopDong, sinhvien.GioiTinh, sinhvien.QueQuan,sinhvien.CCCD,sinhvien.SDT, sinhvien.Truong,sinhvien.Lop,sinhvien.NienKhoa,sinhvien.GhiChu,hopdong.MaPhong,hopdong.NgayBatDau,hopdong.NgayKetThuc,hopdong.ThoiHan,hopdong.GhiChu, hopdong.TrangThai,taikhoan.id AS IDTaiKhoan,taikhoan.MaPQ FROM sinhvien,phong,hopdong,taikhoan where sinhvien.id = hopdong.MaSV and hopdong.MaPhong=phong.MaPhong and taikhoan.MaSV = sinhvien.id and hopdong.TrangThai IN ( "Đã duyệt", "Chờ duyệt","Từ Chối") group by MaPQ HAVING MaPQ =5');
+    const [rows] = await db.query('SELECT  sinhvien.id ,sinhvien.MaSV,sinhvien.anh,sinhvien.HoTen, sinhvien.NgaySinh,sinhvien.Email,hopdong.id AS IDHopDong, sinhvien.GioiTinh,sinhvien.QueQuan,sinhvien.CCCD,sinhvien.SDT,sinhvien.Truong,sinhvien.Lop,sinhvien.NienKhoa,sinhvien.GhiChu,hopdong.MaPhong,hopdong.NgayBatDau,hopdong.NgayKetThuc,hopdong.ThoiHan,hopdong.GhiChu, hopdong.TrangThai FROM sinhvien,phong,hopdong where sinhvien.id = hopdong.MaSV and hopdong.MaPhong=phong.MaPhong and sinhvien.TrangThai IN ("Chờ duyệt", "Chờ nhận phòng", "Đã duyệt")');
     return rows;
   } catch (error) {
     console.error('Lỗi khi lấy danh sách sinh vien:', error);
@@ -22,7 +22,7 @@ export const getAllSinhVienData = async () => {
 export const getSinhVienById = async (id) => {
   try {
     const [rows] = await db.query('SELECT * FROM sinhvien WHERE id = ?', [id]);
-    return rows[0];
+    return rows[0]; 
   } catch (error) {
     console.error('Lỗi khi lấy danh sách sinh vien:', error);
     throw error;
@@ -59,10 +59,10 @@ export const getSinhVienByIdUser = async (id) => {
 
 export const createSinhVien = async (hoadon) => {
   try {
-    const {MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, anh, GhiChu} = hoadon;
+    const {MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, anh, GhiChu,TrangThai} = hoadon;
      const [result] = await db.query(
-      'INSERT INTO sinhvien (MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, anh, GhiChu) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-      [MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, anh, GhiChu]
+      'INSERT INTO sinhvien (MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, anh, GhiChu,TrangThai) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)',
+      [MaSV, HoTen, NgaySinh, QueQuan, GioiTinh, Email, CCCD, SDT, Truong, Lop, NienKhoa, anh, GhiChu,TrangThai]
     );
     return { id: result.insertId };
   } catch (error) {
