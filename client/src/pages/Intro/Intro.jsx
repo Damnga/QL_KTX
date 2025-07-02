@@ -7,10 +7,18 @@ import Campus from "../../component/Campus/Campus";
 import Footer from "../../component/Footer/Footer";
 import Banner from "../../component/Banner/Banner";
 import { usePhongContext } from '../../context/PhongContext';
+import {getAllSinhVienTong} from "../../routes/sinhvien";
+import {getAllHopDongTong} from "../../routes/hopdong"
+import {getAllPhongTong} from "../../routes/phong"
+import {getAllSuKienDang} from "../../routes/sukien";
 const Intro = () => {
   const {t} = usePhongContext();
   const containerRef = useRef(null)
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
+  const [tongsinhvien,settongsinhvien] = useState(0);
+  const [tonghopdong,settonghopdong]= useState(0);
+  const [tongphong,settongphong] = useState(0);
+  const [sukiendang,setsukiendang] = useState([]);
     useEffect(() => {
       const observer = new IntersectionObserver(
         ([entry]) => {
@@ -23,8 +31,26 @@ const Intro = () => {
       if (containerRef.current) {
         observer.observe(containerRef.current)
       }
-      return () => observer.disconnect()
+      return () => observer.disconnect();
     }, [])
+    useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const svRes = await getAllSinhVienTong();
+        const hdRes = await getAllHopDongTong();
+        const phongRes = await getAllPhongTong();
+        const sukienRes = await getAllSuKienDang();
+      settongsinhvien(svRes.tong);
+      settonghopdong(hdRes.tong);
+      settongphong(phongRes.tong);
+      setsukiendang(sukienRes);
+      } catch (error) {
+        console.error("Lỗi lấy dữ liệu tổng:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
     const images = [
       '/images/daihocmo.jpg',
       '/images/hienmau.png',
@@ -97,7 +123,7 @@ const Intro = () => {
             <div className="stat-icon">&#128101;</div>
             <div className="stat-text">
               <div className="stat-number">
-                {isVisible ? <CountUp end={34000} duration={5} separator="," /> : 0}+
+                {isVisible ? <CountUp end={tongsinhvien} duration={5} separator="," /> : 0}
               </div>
               <div className="stat-label">{t('internal student')}</div>
             </div>
@@ -106,7 +132,7 @@ const Intro = () => {
             <div className="stat-icon">&#127891;</div>
             <div className="stat-text">
               <div className="stat-number">
-                {isVisible ? <CountUp end={1228} duration={5} separator="," /> : 0}
+                {isVisible ? <CountUp end={tonghopdong} duration={5} separator="," /> : 0}
               </div>
               <div className="stat-label">{t('Students exempt and reduce room fees')}</div>
             </div>
@@ -115,7 +141,7 @@ const Intro = () => {
             <div className="stat-icon">&#128716;</div>
             <div className="stat-text">
               <div className="stat-number">
-                {isVisible ? <CountUp end={6700} duration={5} separator="," /> : 0}+
+                {isVisible ? <CountUp end={tongphong} duration={5} separator="," /> : 0}
               </div>
               <div className="stat-label">{t('room')}</div>
             </div>
@@ -128,24 +154,48 @@ const Intro = () => {
         {t('event')}<span> {t('upcoming')}</span>
       </h2>
       <div className="event-content">
-        <div className="event-left">
-          <img src={events[0].image} alt="featured" />
-          <h3>{events[0].title}</h3>
-          <p className="event-date">Thời gian diễn ra: <span>{events[0].date}</span></p>
-        </div>
-        <div className="event-right">
-          {events.slice(1).map((e, i) => (
-            <div key={i} className="event-item">
-              <img src={e.image} alt={e.title} />
-              <div className="event-info">
-                <h4>{e.title}</h4>
-                <p className="event-date"> {e.date}</p>
-                {e.end && <p className="event-date"> {e.end}</p>}
-              </div>
-            </div>
-          ))}
-        </div>
+  {sukiendang.length > 0 ? (
+    <>
+      <div className="event-left">
+        <img
+          src={`http://localhost:3000/uploads/${sukiendang[0].anh}`}
+          alt={sukiendang[0].TenSK || "featured"}
+        />
+        <h3>{sukiendang[0].TenSK}</h3>
+        <p>{sukiendang[0].NoiDun}</p>
+        <p className="event-date">
+          Thời gian diễn ra:{" "}
+          <span>
+            {new Date(sukiendang[0].TgianBatDau).toLocaleDateString()} - {new Date(sukiendang[0].TgianKetThuc).toLocaleDateString()}
+          </span>
+        </p>
       </div>
+
+      <div className="event-right">
+        {sukiendang.slice(1).map((e, i) => (
+          <div key={i} className="event-item">
+            <img
+              src={`http://localhost:3000/uploads/${e.anh}`}
+              alt={e.TenSK || `Sự kiện ${i + 2}`}
+            />
+            <div className="event-info">
+              <h4>{e.TenSK}</h4>
+              <p>{e.NoiDung}</p>
+              <p className="event-date">{new Date(sukiendang[0].TgianBatDau).toLocaleDateString()}</p>
+              {e.TgianKetThuc && (
+                <p className="event-date">{new Date(sukiendang[0].TgianKetThuc).toLocaleDateString()}</p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  ) : (
+    <div className="event-empty">
+      <p>Không có sự kiện nào đang diễn ra</p>
+    </div>
+  )}
+</div>
     </div>
       </div>
       <div className='intro_container_bottom'>

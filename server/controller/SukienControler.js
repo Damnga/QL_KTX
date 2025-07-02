@@ -1,5 +1,5 @@
 
-import {getAllSuKien,getAllSuKienData, getSuKienById, createSuKien, updateSuKien, deleteSuKien } from "../model/SukienModel.js";
+import {getAllSuKien,getAllSuKienData,getAllSuKienDang, getSuKienById, createSuKien, updateSuKien, deleteSuKien } from "../model/SukienModel.js";
 
 export const create = async (req, res, next) => {
   try {
@@ -15,6 +15,14 @@ export const create = async (req, res, next) => {
 export const getSuKien = async (req, res, next) => {
   try {
     const rows = await getAllSuKien();
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
+};
+export const getSuKienDang = async (req, res, next) => {
+  try {
+    const rows = await getAllSuKienDang();
     res.json(rows);
   } catch (err) {
     next(err);

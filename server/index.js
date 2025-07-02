@@ -141,4 +141,5 @@ app.use('/openai',chat);
 app.use('/dang_ky',dangky);
 app.use(errorHandler);
 const PORT = 3000;
-server.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`http://172.20.10.7:${PORT}`));
+export {io};

@@ -91,7 +91,7 @@ const EventScreen = () => {
         return (
           <View key={event.id} style={styles.card}>
             <Image
-              source={{ uri: `http://192.168.1.5:3000/uploads/${event.anh}` }}
+              source={{ uri: `http://172.20.10.3:3000/uploads/${event.anh}` }}
               style={styles.image}
             />
             <View style={styles.cardContent}>

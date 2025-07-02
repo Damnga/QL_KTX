@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://192.168.1.5:3000/binh_luan';
+const API_URL = 'http://172.20.10.3:3000/binh_luan';
 
 
 export const createBinhLuan= async (formData) => {

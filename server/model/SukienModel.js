@@ -18,6 +18,15 @@ export const getAllSuKienData = async () => {
     throw error;
   }
 };
+export const getAllSuKienDang = async () => {
+  try {
+    const [rows] = await db.query('SELECT sukien.id,TenSK,NoiDung,Username,TgianBatDau,TgianKetThuc, sukien.anh FROM sukien,taikhoan where sukien.MaTK=taikhoan.id and sukien.TrangThai = "Đang diễn ra"');
+    return rows;
+  } catch (error) {
+    console.error('Lỗi khi lấy danh sách su kien:', error);
+    throw error;
+  }
+};
 
 export const getSuKienById = async (id) => {
   try {

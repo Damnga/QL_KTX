@@ -1,11 +1,12 @@
 import express from 'express';
 import upload from '../middleware/multer.js';
-import {create,create2,getSinhVienCCCD,getSinhVien, getSinhVienData,getSinhVienIdSinhVien,getSinhVienId,getSinhVienIdUser,update,remove} from "../controller/SinhvienControler.js";
+import {create,create2,getSinhVienCCCD,getSinhVienTong,getSinhVien, getSinhVienData,getSinhVienIdSinhVien,getSinhVienId,getSinhVienIdUser,update,remove} from "../controller/SinhvienControler.js";
 import {authenticateToken,authorizeRoles} from "../middleware/auth.js"
 const router = express.Router();
 router.post('/create', upload.single('anh'), create);
 router.post('/createsinhvien', upload.single('anh'), create2);
 router.get('/select', getSinhVien);
+router.get('/select_tong', getSinhVienTong);
 router.get('/select_data', getSinhVienData);
 router.get('/select_data/:id', getSinhVienIdSinhVien);
 router.get('/select_CCCD/:CCCD', getSinhVienCCCD);

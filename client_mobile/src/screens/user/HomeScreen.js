@@ -156,7 +156,7 @@ const handlePost = async () => {
     return (
       <View style={styles.post}>
         <View style={styles.postHeader}>
-          <Image source={{ uri: `http://192.168.1.5:3000/uploads/${post.anhnguoidung}` }} style={styles.avatar} />
+          <Image source={{ uri: `http://172.20.10.3:3000/uploads/${post.anhnguoidung}` }} style={styles.avatar} />
           <View>
             <Text style={styles.author}>{post.Username}</Text>
             <Text style={styles.timestamp}>{new Date(post.Tgian).toLocaleDateString('vi-VN')}</Text>
@@ -165,7 +165,7 @@ const handlePost = async () => {
         <Text style={styles.postContent}>{post.NoiDung}</Text>
         {post.anhbaiviet && (
           <Image
-            source={{ uri: `http://192.168.1.5:3000/uploads/${post.anhbaiviet}` }}
+            source={{ uri: `http://172.20.10.3:3000/uploads/${post.anhbaiviet}` }}
             style={styles.postImage}
             resizeMode="cover"
           />
@@ -195,7 +195,7 @@ const handlePost = async () => {
       {userData && (
         <View style={styles.postForm}>
           <View style={styles.postFormHeader}>
-            <Image source={{ uri: `http://192.168.1.5:3000/uploads/${userData.anh}` }} style={styles.avatar} />
+            <Image source={{ uri: `http://172.20.10.3:3000/uploads/${userData.anh}` }} style={styles.avatar} />
             <TextInput
               value={newPost}
               placeholder={`${userData.username} à, bạn đang nghĩ gì thế?`}

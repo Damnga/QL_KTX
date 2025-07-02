@@ -249,7 +249,7 @@ export default function ProfileScreen() {
     <ScrollView style={styles.container}>
       {/* Thông tin cá nhân */}
       <View style={styles.card}>
-    <Image  source={{ uri: `http://192.168.1.5:3000/uploads/${sinhvienuser?.anh || "default.png"}` }}  style={styles.avatar}/>
+    <Image  source={{ uri: `http://172.20.10.3:3000/uploads/${sinhvienuser?.anh || "default.png"}` }}  style={styles.avatar}/>
     <Text style={styles.status}>{sinhvienuser?.TrangThai || "Không rõ trạng thái"}</Text>
     <View style={styles.info}>
       <Text style={styles.name}>{sinhvienuser?.HoTen || "Chưa có tên"}</Text>
@@ -386,19 +386,19 @@ export default function ProfileScreen() {
       <View style={styles.table}>
         <View style={[styles.tableRow, styles.tableHeader]}>
           <View style={[styles.tableCell, { width: 100 }]}><Text style={styles.tableHeaderText}>Đơn Xin</Text></View>
-          <TouchableOpacity  style={styles.button_img}  onPress={() => handleOpenImage(`http://192.168.1.5:3000/uploads/${hoso.DonXin}`)} ><Text style={styles.text_img}>{hoso.DonXin}</Text></TouchableOpacity>
+          <TouchableOpacity  style={styles.button_img}  onPress={() => handleOpenImage(`http://172.20.10.3:3000/uploads/${hoso.DonXin}`)} ><Text style={styles.text_img}>{hoso.DonXin}</Text></TouchableOpacity>
         </View>
         <View style={[styles.tableRow, styles.tableHeader]}>
           <View style={[styles.tableCell, { width: 100 }]}><Text style={styles.tableHeaderText}>Giấy xác nhận sinh viên</Text></View>
-          <TouchableOpacity  style={styles.button_img}  onPress={() => handleOpenImage(`http://192.168.1.5:3000/uploads/${hoso.GiayXacNhanSinhVien}`)} ><Text style={styles.text_img}>{hoso.GiayXacNhanSinhVien}</Text></TouchableOpacity>
+          <TouchableOpacity  style={styles.button_img}  onPress={() => handleOpenImage(`http://172.20.10.3:3000/uploads/${hoso.GiayXacNhanSinhVien}`)} ><Text style={styles.text_img}>{hoso.GiayXacNhanSinhVien}</Text></TouchableOpacity>
         </View>
         <View style={[styles.tableRow, styles.tableHeader]}>
           <View style={[styles.tableCell, { width: 100 }]}><Text style={styles.tableHeaderText}>CCCD Photo</Text></View>
-          <TouchableOpacity  style={styles.button_img}  onPress={() => handleOpenImage(`http://192.168.1.5:3000/uploads/${hoso.CCCDPhoTo}`)} ><Text style={styles.text_img}>{hoso.CCCDPhoTo}</Text></TouchableOpacity>
+          <TouchableOpacity  style={styles.button_img}  onPress={() => handleOpenImage(`http://172.20.10.3:3000/uploads/${hoso.CCCDPhoTo}`)} ><Text style={styles.text_img}>{hoso.CCCDPhoTo}</Text></TouchableOpacity>
         </View>
         <View style={[styles.tableRow, styles.tableHeader]}>
           <View style={[styles.tableCell, { width: 100 }]}><Text style={styles.tableHeaderText}>Hợp Đồng</Text></View>
-          <TouchableOpacity  style={styles.button_img}  onPress={() => handleOpenImage(`http://192.168.1.5:3000/uploads/${hoso.HopDong}`)} ><Text style={styles.text_img}>{hoso.HopDong}</Text></TouchableOpacity>
+          <TouchableOpacity  style={styles.button_img}  onPress={() => handleOpenImage(`http://172.20.10.3:3000/uploads/${hoso.HopDong}`)} ><Text style={styles.text_img}>{hoso.HopDong}</Text></TouchableOpacity>
         </View>
       </View>
       <Modal visible={!!openImage} transparent animationType="slide" onRequestClose={handleCloseImage}>

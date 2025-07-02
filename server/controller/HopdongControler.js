@@ -1,5 +1,5 @@
 
-import {getAllHopDong,getHopDongByMaSV, getHopDongById,getHopDongByIdTaiKhoan,createHopDong, updateHopDong, deleteHopDong} from "../model/HopdongModel.js"
+import {getAllHopDong,getHopDongByMaSV,getAllTongDang, getHopDongById,getHopDongByIdTaiKhoan,createHopDong, updateHopDong, deleteHopDong} from "../model/HopdongModel.js"
 
 export const create = async (req, res, next) => {
   try {
@@ -13,6 +13,14 @@ export const create = async (req, res, next) => {
 export const getHopDong = async (req, res, next) => {
   try {
     const rows = await getAllHopDong();
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
+};
+export const getHopDongDang = async (req, res, next) => {
+  try {
+    const rows = await getAllTongDang();
     res.json(rows);
   } catch (err) {
     next(err);

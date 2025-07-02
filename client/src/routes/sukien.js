@@ -32,6 +32,18 @@ export const getAllSuKien = async (token) => {
     throw error.response?.data;
   }
 };
+export const getAllSuKienDang = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/select_tong`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data;
+  }
+};
 export const getAllSuKienData = async (token) => {
   try {
     const response = await axios.get(`${API_URL}/select_data`, {

@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://192.168.1.5:3000/tin_nhan';
+const API_URL = 'http://172.20.10.3:3000/tin_nhan';
 
 export const createTinNhan = async (data,token) => {
   try {

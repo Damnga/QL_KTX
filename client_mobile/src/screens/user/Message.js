@@ -148,7 +148,7 @@ const MessageScreen = () => {
                   onPress={() => handleSelectUser(item)}
                 >
                   <Image
-                    source={{ uri: `http://192.168.1.5:3000/uploads/${item.anh}` }}
+                    source={{ uri: `http://172.20.10.3:3000/uploads/${item.anh}` }}
                     style={styles.avatar}
                   />
                   <Text style={styles.contactName}>{item.Username}</Text>
@@ -162,7 +162,7 @@ const MessageScreen = () => {
                   <Ionicons name="arrow-back" size={24} color="#1877f2" />
                 </TouchableOpacity>
                 <Image
-                  source={{ uri: `http://192.168.1.5:3000/uploads/${selectedUser.anh}` }}
+                  source={{ uri: `http://172.20.10.3:3000/uploads/${selectedUser.anh}` }}
                   style={styles.avatar}
                 />
                 <Text style={styles.headerText}>{selectedUser.Username}</Text>

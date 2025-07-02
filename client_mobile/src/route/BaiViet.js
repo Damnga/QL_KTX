@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://192.168.1.5:3000/bai_viet';
+const API_URL = 'http://172.20.10.3:3000/bai_viet';
 
 export const createBaiViet = async (data) => {
  const response = await axios.post(`${API_URL}/create`, data, {

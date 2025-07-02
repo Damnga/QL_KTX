@@ -9,6 +9,16 @@ export const getAllSinhVien = async () => {
     throw error;
   }
 };
+export const getAllTong = async () => {
+  try {
+    const [rows] = await db.query('select count(id) as tong from sinhvien');
+    return rows[0];
+  } catch (error) {
+    console.error('Lỗi khi lấy danh sách sinh vien:', error);
+    throw error;
+  }
+};
+
 export const getAllSinhVienData = async () => {
   try {
     const [rows] = await db.query('SELECT sinhvien.id,sinhvien.anh,sinhvien.HoTen, sinhvien.NgaySinh,sinhvien.Email, sinhvien.GioiTinh, sinhvien.QueQuan, phong.TenPhong,hopdong.TrangThai FROM sinhvien,phong,hopdong where sinhvien.id = hopdong.MaSV and hopdong.MaPhong=phong.MaPhong and hopdong.TrangThai IN ("Đang ở", "Sắp hết hạn", "Hết hạn", "Đã thanh lý","Đã nhận phòng ")');
@@ -28,6 +38,17 @@ export const getSinhVienById = async (id) => {
     throw error;
   }
 };
+
+export const getSinhVienByMaThe= async (GhiChu) => {
+  try {
+    const [rows] = await db.query('SELECT id, HoTen FROM sinhvien WHERE GhiChu = ?', [GhiChu]);
+    return rows; 
+  } catch (error) {
+    console.error('Lỗi khi lấy danh sách sinh vien:', error);
+    throw error;
+  }
+};
+
 export const getSinhVienByIdSinhVien = async (id) => {
   try {
     const [rows] = await db.query('SELECT taikhoan.id AS MaTK FROM sinhvien,taikhoan WHERE taikhoan.MaSV = sinhvien.id and sinhvien.id = ?', [id]);

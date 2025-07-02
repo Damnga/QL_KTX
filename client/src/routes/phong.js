@@ -29,6 +29,30 @@ export const getAllPhong = async (token) => {
     throw error.response?.data;
   }
 };
+export const getAllPhongTong = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/select_tong`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data;
+  }
+};
+export const getAllPhongTongGiuong = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/select_data_giuong`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data;
+  }
+};
 export const getAllPhongData = async (token) => {
   try {
     const response = await axios.get(`${API_URL}/select_data`, {

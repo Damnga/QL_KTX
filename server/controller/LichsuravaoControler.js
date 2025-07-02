@@ -2,8 +2,8 @@ import {getAllLichSuRaVao, getLichSuRaVaoById,getLichSuRaVaoByIdSinhVien, create
 
 export const create = async (req, res, next) => {
   try {
-    const {MaSV, LoaiHoatDong, Tgian, TrangThai} = req.body;
-    await createLichSuRaVao({MaSV, LoaiHoatDong, Tgian, TrangThai});
+    const {MaSV, LoaiHoatDong, TrangThai} = req.body;
+    await createLichSuRaVao({MaSV, LoaiHoatDong, TrangThai});
     res.status(201).json({ message: 'Tạo lich su thành công' });
   } catch (err) {
     next(err);

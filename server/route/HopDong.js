@@ -1,10 +1,11 @@
 import express from 'express';
 import upload from '../middleware/multer.js';
-import {create,getHopDong,getHopDongMaSV,getHopDongIdTaiKhoan,updateData,getHopDongId,update,remove} from "../controller/HopdongControler.js";
+import {create,getHopDong,getHopDongDang,getHopDongMaSV,getHopDongIdTaiKhoan,updateData,getHopDongId,update,remove} from "../controller/HopdongControler.js";
 import {authenticateToken,authorizeRoles} from "../middleware/auth.js"
 const router = express.Router();
 router.post('/create', create);
 router.get('/select', getHopDong);
+router.get('/select_tong', getHopDongDang);
 router.get('/select/:id', getHopDongMaSV);
 router.get('/taikhoan/:id', getHopDongIdTaiKhoan);
 router.get('/:id', getHopDongId);

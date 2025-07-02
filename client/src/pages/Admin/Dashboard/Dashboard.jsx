@@ -5,6 +5,9 @@ import CountUp from 'react-countup';
 import { Chart as ChartJS, CategoryScale,LinearScale,PointElement, LineElement,Title,Tooltip,Legend, ArcElement} from 'chart.js';
 ChartJS.register( CategoryScale, LinearScale,PointElement,LineElement,Title,Tooltip,Legend,ArcElement);
 import { Line, Pie } from 'react-chartjs-2';
+import {getAllSinhVienTong} from "../../../routes/sinhvien";
+import {getAllHopDongTong} from "../../../routes/hopdong"
+import {getAllPhongTong,getAllPhongTongGiuong} from "../../../routes/phong"
 const Dashboard = () => {
   const containerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -22,6 +25,30 @@ const Dashboard = () => {
         }
         return () => observer.disconnect()
       }, []);
+        const [tongsinhvien,settongsinhvien] = useState(0);
+        const [tonghopdong,settonghopdong]= useState(0);
+        const [tongphong,settongphong] = useState(0);
+        const [tonggiuong,settonggiuong] = useState(0);
+      useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const svRes = await getAllSinhVienTong();
+          const hdRes = await getAllHopDongTong();
+          const phongRes = await getAllPhongTong();
+
+        settongsinhvien(svRes.tong);
+        settonghopdong(hdRes.tong);
+        settongphong(phongRes.tong);
+        const gRes = await getAllPhongTongGiuong();
+        settonggiuong(gRes);
+
+        } catch (error) {
+          console.error("Lỗi lấy dữ liệu tổng:", error);
+        }
+      };
+  
+      fetchData();
+    }, []);
   const lineData = {
         labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6'],
         datasets: [
@@ -47,7 +74,7 @@ const Dashboard = () => {
         labels: ['Phòng 8 người', 'Phòng 4 người'],
         datasets: [
           {
-            data: [45, 25],
+            data: [tonggiuong.Phong4Nguoi, tonggiuong.Phong8Nguoi],
             backgroundColor: ['#3498db', '#e74c3c', '#9b59b6'],
             borderColor: '#fff',
             borderWidth: 2,
@@ -95,25 +122,25 @@ const Dashboard = () => {
             <div className="stat-icon">&#128101;</div>
             <div className="stat-text">
               <div className="stat-number">
-                {isVisible ? <CountUp end={34000} duration={2} separator="," /> : 0}+
+                {isVisible ? <CountUp end={tongsinhvien} duration={2} separator="," /> : 0}+
               </div>
-              <div className="stat-label">Sinh viên nội trú</div>
+              <div className="stat-label">Sinh viên đã và đang ở ktx</div>
             </div>
           </div>
           <div className="stat gradient-bg">
             <div className="stat-icon">&#127891;</div>
             <div className="stat-text">
               <div className="stat-number">
-                {isVisible ? <CountUp end={1228} duration={2} separator="," /> : 0}
+                {isVisible ? <CountUp end={tonghopdong} duration={2} separator="," /> : 0}
               </div>
-              <div className="stat-label">Lượt sinh viên miễn, giảm lệ phí phòng ở</div>
+              <div className="stat-label">Sinh viên đang ở ktx</div>
             </div>
           </div>
           <div className="stat blue-bg">
             <div className="stat-icon">&#128716;</div>
             <div className="stat-text">
               <div className="stat-number">
-                {isVisible ? <CountUp end={6700} duration={2} separator="," /> : 0}+
+                {isVisible ? <CountUp end={tongphong} duration={2} separator="," /> : 0}+
               </div>
               <div className="stat-label">Phòng ở</div>
             </div>

@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://192.168.1.5:3000/hop_dong';
+const API_URL = 'http://172.20.10.3:3000/hop_dong';
 
 export const createHopDong = async (formData, token) => {
   try {

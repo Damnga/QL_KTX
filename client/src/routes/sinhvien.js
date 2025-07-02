@@ -54,6 +54,18 @@ export const getAllSinhVien = async (token) => {
     throw error.response?.data;
   }
 };
+export const getAllSinhVienTong = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/select_tong`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data;
+  }
+};
 
 export const getAllSinhVienData = async (token) => {
   try {

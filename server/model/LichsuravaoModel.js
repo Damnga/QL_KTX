@@ -33,8 +33,8 @@ export const createLichSuRaVao = async (hoadon) => {
   try {
     const {MaSV, LoaiHoatDong, Tgian, TrangThai} = hoadon;
     await db.query(
-      'INSERT INTO lichsuravao (MaSV, LoaiHoatDong, Tgian, TrangThai) VALUES (?, ?, ?, ?)',
-      [MaSV, LoaiHoatDong, Tgian, TrangThai]
+      'INSERT INTO lichsuravao (MaSV, LoaiHoatDong, Tgian, TrangThai) VALUES (?, ?, NOW(), ?)',
+      [MaSV, LoaiHoatDong, TrangThai]
     );
   } catch (error) {
     console.error('Error in createLichsuravao:', error);

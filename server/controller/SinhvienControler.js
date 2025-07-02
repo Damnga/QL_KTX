@@ -1,5 +1,5 @@
 
-import {getAllSinhVien,getSinhVienByCCCD, getAllSinhVienData,getSinhVienByIdSinhVien, getSinhVienById,getSinhVienByIdUser, createSinhVien, updateSinhVien, deleteSinhVien } from "../model/SinhvienModel.js"
+import {getAllSinhVien,getSinhVienByCCCD,getAllTong, getAllSinhVienData,getSinhVienByMaThe,getSinhVienByIdSinhVien, getSinhVienById,getSinhVienByIdUser, createSinhVien, updateSinhVien, deleteSinhVien } from "../model/SinhvienModel.js"
 
 export const create = async (req, res, next) => {
   try {
@@ -43,6 +43,15 @@ export const getSinhVien = async (req, res, next) => {
     next(err);
   }
 };
+
+export const getSinhVienTong = async (req, res, next) => {
+  try {
+    const rows = await getAllTong();
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
+};
 export const getSinhVienData = async (req, res, next) => {
   try {
     const rows = await getAllSinhVienData();
@@ -55,6 +64,16 @@ export const getSinhVienId = async (req, res, next) => {
   try {
     const id = req.params.id;
     const phong = await getSinhVienById(id);
+    if (!phong) return res.status(404).json({ message: 'Không tìm thấy sinh vien' });
+    res.json(phong);
+  } catch (err) {
+    next(err);
+  }
+};
+export const getSinhVienIdMaThe = async (req, res, next) => {
+  try {
+    const id = req.params.GhiChu;
+    const phong = await getSinhVienByMaThe(id);
     if (!phong) return res.status(404).json({ message: 'Không tìm thấy sinh vien' });
     res.json(phong);
   } catch (err) {

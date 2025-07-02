@@ -5,18 +5,16 @@ const API_URL = 'http://localhost:3000/lich_su_ra_vao';
 
 export const createNguoiThan = async (formData) => {
   try {
-    const formDataToSend = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-    const response = await axios.post(`${API_URL}/create`, formDataToSend, {
+    const response = await axios.post(`${API_URL}/create`, formData, {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
       },
     });
+
     return response.data;
   } catch (error) {
-    throw error.response?.data;
+    console.error('❌ Lỗi khi tạo người thân:', error);
+    throw error.response?.data || { message: 'Lỗi không xác định từ server' };
   }
 };
 

@@ -15,6 +15,7 @@ import {getByIdKyLuatSinhVien} from "../../../routes/kyluat";
 import {getByIdLichSuRaVaoSinhVien} from "../../../routes/lichsuravao";
 import {handleThanhToan} from "../../../routes/thanhtoan";
 import {getAllHoaDonData} from "../../../routes/hoadon";
+import {socket} from "../../../utils/socket";
 const LakeProfile = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
@@ -88,6 +89,14 @@ const LakeProfile = () => {
     }
   };
   fetchUser();
+   const handleScanSuccess = (data) => {
+    console.log("📡 Nhận dữ liệu quét mới: ", data);
+    setlichsuravao(data.history); 
+  };
+  socket.on("scanSuccess", handleScanSuccess);
+  return () => {
+    socket.off("scanSuccess", handleScanSuccess);
+  };
   }, [token, userId]);
   const [showDangKySuaChua, setShowDangKySuaChua] = useState(false);
   const [noiDungSuaChua, setNoiDungSuaChua] = useState("");
@@ -196,6 +205,7 @@ const LakeProfile = () => {
   }
   };
   if (loading) return <p>Đang tải...</p>;
+
   return (
     <div className="profile">
       <div className="profile-container">
@@ -239,15 +249,15 @@ const LakeProfile = () => {
               </tr>
               </thead>
               {tenphongtenTNuser.map((sv, index) => (
-  <tr key={index}>
-    <td>{index + 1}</td>
-    <td>{sv.HoTen}</td>
-    <td>{new Date(sv.NgaySinh).toLocaleDateString('vi-VN')}</td>
-    <td>{sv.Truong}</td>
-    <td>{new Date(sv.NgayBatDau).toLocaleDateString('vi-VN')}</td>
-    <td>{new Date(sv.NgayKetThuc).toLocaleDateString('vi-VN')}</td>
-    <td>{sv.trangthaihopdong}</td>
-  </tr>
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>{sv.HoTen}</td>
+                <td>{new Date(sv.NgaySinh).toLocaleDateString('vi-VN')}</td>
+                <td>{sv.Truong}</td>
+                <td>{new Date(sv.NgayBatDau).toLocaleDateString('vi-VN')}</td>
+                <td>{new Date(sv.NgayKetThuc).toLocaleDateString('vi-VN')}</td>
+                <td>{sv.trangthaihopdong}</td>
+              </tr>
               ))}
             </table>
             <p>✏️Lịch sử sửa chữa phòng</p>
@@ -306,7 +316,7 @@ const LakeProfile = () => {
                     <td>{sv.MaNguoiLap}</td>
                     <td>{sv.TongTien}</td>
                     <td>{sv.TrangThai}</td>
-                    <td><button className="expand-btn">Thanh Toán</button></td>
+                    <td><button className="expand-btn" onClick={() => handleThanhToan(sv.TongTien)}>Thanh Toán</button></td>
                   </tr>
                 );
               })}
@@ -528,7 +538,7 @@ const LakeProfile = () => {
               {lichsuravao.map((sv, index) => (
               <tr key={index}>
                 <td>{sv.LoaiHoatDong}</td>
-                <td>{new Date(sv.Tgian).toLocaleDateString('vi-VN')}</td>
+                <td>{new Date(new Date(sv.Tgian)).toLocaleString('vi-VN')}</td>
                 <td>{sv.TrangThai}</td>
               </tr>
               ))}

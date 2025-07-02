@@ -9,6 +9,24 @@ export const getAllPhong = async () => {
     throw error;
   }
 };
+export const getAllPhongTong = async () => {
+  try {
+    const [rows] = await db.query('SELECT SUM(lp.SoNguoi) AS tong FROM phong p JOIN loaiphong lp ON p.MaLoai = lp.MaLoai;');
+    return rows[0];
+  } catch (error) {
+    console.error('Lỗi khi lấy danh sách phòng:', error);
+    throw error;
+  }
+};
+export const getAllPhongTongGiuong = async () => {
+  try {
+    const [rows] = await db.query('SELECT SUM(CASE WHEN SoNguoi = 4 THEN 1 ELSE 0 END) AS Phong4Nguoi, SUM(CASE WHEN SoNguoi = 8 THEN 1 ELSE 0 END) AS Phong8Nguoi FROM loaiphong,phong where phong.MaLoai = loaiphong.MaLoai;');
+    return rows[0];
+  } catch (error) {
+    console.error('Lỗi khi lấy danh sách phòng:', error);
+    throw error;
+  }
+};
 export const getAllPhongData = async () => {
   try {
 const [rows] = await db.query(`SELECT toanha.MaTN, phong.MaPhong, phong.TenPhong, loaiphong.LoaiPhong, toanha.TenTN, phong.TrangThai,loaiphong.SoNguoi, phong.GhiChu, COUNT(hopdong.id) AS SoLuongHopDong FROM phong JOIN loaiphong ON phong.MaLoai = loaiphong.MaLoai JOIN toanha ON phong.MaTN = toanha.MaTN  LEFT JOIN hopdong ON phong.MaPhong = hopdong.MaPhong GROUP BY   phong.MaPhong, phong.TenPhong,  loaiphong.LoaiPhong,   toanha.TenTN,  phong.TrangThai,  loaiphong.SoNguoi, phong.GhiChu`);

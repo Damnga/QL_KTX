@@ -1,5 +1,5 @@
 
-import {getAllPhong, getAllPhongData,getTenPhongByIdTK,getTenPhongByTenPhongToaNha, getPhongById, createPhong, updatePhong, deletePhong } from "../model/PhongModel.js"
+import {getAllPhong, getAllPhongData,getAllPhongTongGiuong,getAllPhongTong,getTenPhongByIdTK,getTenPhongByTenPhongToaNha, getPhongById, createPhong, updatePhong, deletePhong } from "../model/PhongModel.js"
 
 export const create = async (req, res, next) => {
   try {
@@ -14,6 +14,22 @@ export const create = async (req, res, next) => {
 export const getPhong = async (req, res, next) => {
   try {
     const rows = await getAllPhong();
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
+};
+export const getPhongTong = async (req, res, next) => {
+  try {
+    const rows = await getAllPhongTong();
+    res.json(rows);
+  } catch (err) {
+    next(err);
+  }
+};
+export const getPhongTongGiuong = async (req, res, next) => {
+  try {
+    const rows = await getAllPhongTongGiuong();
     res.json(rows);
   } catch (err) {
     next(err);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Linking, Alert } from 'react-native';
-const API_URL = 'http://192.168.1.5:3000/thanh_toan';
+const API_URL = 'http://172.20.10.3:3000/thanh_toan';
 export const handleThanhToan = async (amount) => {
   try {
     const response = await axios.post(`${API_URL}/create_payment`, {

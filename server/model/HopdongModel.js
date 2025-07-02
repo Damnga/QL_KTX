@@ -10,6 +10,15 @@ export const getAllHopDong = async () => {
   }
 };
 
+export const getAllTongDang = async () => {
+  try {
+    const [rows] = await db.query('select count(id) as tong from hopdong where TrangThai = "Đã Nhận Phòng";');
+    return rows[0];
+  } catch (error) {
+    console.error('Lỗi khi lấy danh sách sinh vien:', error);
+    throw error;
+  }
+};
 export const getHopDongById = async (id) => {
   try {
     const [rows] = await db.query('SELECT * FROM hopdong WHERE id = ?', [id]);
